@@ -36,3 +36,9 @@ file_set {
     Name: "all_files",
     Select: ["**"],
 }
+
+sub_builds {
+    Dirs: [
+        "jarvis/web",
+    ],
+}
