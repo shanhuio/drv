@@ -1,0 +1,7 @@
+{
+    Name: "h8liu",
+    Server: "http://localhost:8001",
+    Channel: "dev-h8liu",
+    Bare: true,
+    EndpointConfigFile: "var/epconfig.jsonx",
+}

@@ -1,0 +1,113 @@
+// Copyright (C) 2022  Shanhu Tech Inc.
+//
+// This program is free software: you can redistribute it and/or modify it
+// under the terms of the GNU Affero General Public License as published by the
+// Free Software Foundation, either version 3 of the License, or (at your
+// option) any later version.
+//
+// This program is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+// FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License
+// for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+@import "./common.less";
+@import "./dashboard.less";
+
+body {
+    font-family: @font-family;
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+    line-height: 1.5em;
+    color: @gray2;
+    background: #fff;
+}
+
+a { color: @link-color }
+
+body.cover {
+    background: @theme-color;
+    color: @gray8;
+}
+
+div.login {
+    padding-top: @gap4;
+    overflow: auto;
+
+    div.logo {
+        background: url('/img/logo-big.png') center no-repeat;
+        background-size: 300px 300px;
+        height: 300px;
+        margin-bottom: @gap4;
+    }
+
+    div.redirect {
+        margin-top: @gap5;
+        margin-bottom: @gap2;
+        text-align: center;
+
+        a {
+            color: @gray8;
+            text-decoration: underline;
+        }
+    }
+
+    form.login {
+        font-size: @text4;
+        text-align: center;
+        div.line {
+            padding: @gap1;
+            line-height: 60px;
+            font-size: @text3;
+
+            span.prompt {
+                width: auto;
+                display: inline-block;
+                text-align: center;
+            }
+
+            input.password {
+                font-family: @font-family;
+
+                margin-left: @gap3;
+                margin-right: @gap3;
+                width: 200px;
+                font-size: @text4;
+                line-height: 1.5em;
+                padding: @gap1;
+                border: none;
+                border-radius: 3px;
+            }
+        }
+
+        input.submit {
+            .button1();
+            color: @gray8;
+            padding-left: @gap4;
+            padding-right: @gap4;
+            background-color: @green3;
+            box-shadow: 0 2px 5px @gray3;
+        }
+
+        input.submit:hover {
+            background-color: @green4;
+        }
+
+        div.hint {
+            color: @gray7;
+            font-size: @text2;
+            line-height: 1.5em;
+        }
+    }
+
+    div.error {
+        color: @gray8;
+        font-size: @text3;
+        line-height: 1.5em;
+        text-align: center;
+        margin-bottom: @gap0;
+    }
+}

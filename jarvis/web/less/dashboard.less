@@ -1,0 +1,318 @@
+// Copyright (C) 2022  Shanhu Tech Inc.
+//
+// This program is free software: you can redistribute it and/or modify it
+// under the terms of the GNU Affero General Public License as published by the
+// Free Software Foundation, either version 3 of the License, or (at your
+// option) any later version.
+//
+// This program is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+// FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License
+// for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+@import "@shanhuio/style/dialog.less";
+
+@import "./common.less";
+
+body.dashboard {
+    background: @gray8;
+}
+
+div.topbar {
+    background: @top-bar-bg;
+    color: @gray8;
+    line-height: 40px;
+    height: 40px;
+    padding-left: @gap3;
+    padding-right: @gap3;
+
+    span.logo {
+        display: inline-block;
+
+        img.logo {
+            margin-top: -3px;
+            vertical-align: middle;
+            width: 20px;
+            height: 20px;
+        }
+
+        padding-right: @gap2;
+    }
+
+    a { color: @gray8; }
+
+    span.right {
+        font-size: @text2;
+        float: right;
+        width: 300px;
+        text-align: right;
+
+        span.part:last-child {
+            padding-right: 0;
+        }
+
+        span.part {
+            padding-right: @gap1;
+            padding-left: @gap1;
+        }
+    }
+}
+
+@menu-width: 240px;
+
+div.menu {
+    float: left;
+    width: @menu-width;
+
+    ol.links {
+        padding-left: @gap3;
+        padding-right: @gap2;
+
+        list-style: none;
+        li {
+            padding-top: @gap-half;
+            padding-bottom: @gap-half;
+            a {
+                color: @gray2;
+            }
+        }
+    }
+}
+
+#button {
+    .button1();
+    padding: @gap1 @gap3 @gap1 @gap3;
+    font-size: @text2;
+    line-height: 1.5em;
+    margin-right: 10px;
+}
+
+#std-input {
+    font-family: @font-family;
+    font-size: @text3;
+    line-height: 1.5em;
+    padding: @gap0 @gap2 @gap0 @gap2;
+    border: 2px @gray6 solid;
+    border-radius: 3px;
+    width: 300px;
+}
+
+div.view {
+    margin-top: @gap3;
+    margin-left: @menu-width;
+    margin-right: @gap3;
+    margin-bottom: @gap3;
+    background-color: #fff;
+    border-radius: 5px;
+    min-height: 400px;
+    padding-left: @gap4;
+    padding-right: @gap4;
+    padding-top: @gap3;
+    padding-bottom: @gap4;
+    box-shadow: 1px 1px 3px 0 @gray6;
+
+    h2 {
+        color: @theme-color;
+        margin-top: 0;
+        padding-top: 0;
+        font-size: @text4;
+    }
+
+    span.warning { color: @red3; }
+    span.error { color: @red3; }
+    span.ok { color: @green4; }
+
+    form {
+        input { font-family: @font-family; }
+        input[type="password"] { #std-input(); }
+        input[type="text"] { #std-input(); }
+
+        div.submit {
+            margin-top: @gap3;
+            margin-bottom: @gap2;
+            input.submit {
+                #button();
+                background: @gray7;
+            }
+            input.submit:hover { background: @gray6; }
+
+            input.green-submit {
+                #button();
+                background: @button-color;
+                color: @gray8;
+            }
+            input.green-submit:hover { background: @button-hover-color; }
+        }
+    }
+
+    div.overview {
+        h3 { margin-top: 0; }
+
+        div.section { margin-bottom: @gap5; }
+
+        div.apps {
+            display: flex;
+            flex-flow: row wrap;
+        }
+        div.app { text-align: center; }
+
+        .logo {
+            display: block;
+            width: 120px;
+            height: 120px;
+            border-radius: 20px;
+            margin-bottom: @gap2;
+        }
+    }
+
+    div.logs {
+        table {
+            font-family: @mono-family;
+            font-size: @small;
+            line-height: 1.7em;
+            td {
+                padding-left: @gap2;
+                padding-right: @gap2;
+            }
+            td:first-child { padding-left: 0; }
+            td:last-child { padding-right: 0; }
+        }
+    }
+
+    div.two-factor {
+        div.error {
+            margin-top: @gap1;
+            margin-bottom: @gap1;
+        }
+
+        div.qr {
+            margin-bottom: @gap3;
+            margin-top: @gap3;
+        }
+    }
+
+    div.ssh-keys {
+        textarea {
+            font-family: @mono-family;
+            height: 300px;
+            width: 100%;
+            max-width: 500px;
+            word-break: break-all;
+        }
+
+        div.controls { margin: @gap3 0; }
+    }
+
+    form.password {
+        div.line {
+            padding-top: @gap1;
+            padding-bottom: @gap1;
+
+            span.field {
+                display: inline-block;
+                width: 180px;
+            }
+        }
+
+        div.submit {
+            span.warning, span.ok {
+                margin-left: @gap4;
+                margin-right: @gap0;
+            }
+        }
+    }
+
+    form.activate {
+        div.line {
+            padding-top: @gap1;
+            padding-bottom: @gap1;
+        }
+
+        input[type="text"] { width: 100px; }
+    }
+
+    span.button-danger {
+        #button();
+        color: @red3;
+        border: 1px solid @red4;
+        background: @gray8;
+    }
+    span.button-danger:hover {
+        color: #fff;
+        background: @red4;
+        border: 1px solid @red4;
+    }
+
+    span.button-red {
+        #button();
+        color: #fff;
+        background: @red3;
+        border: 1px solid @red3;
+    }
+    span.button-red:hover {
+        #button();
+        background: @red4;
+        border: 1px solid @red4;
+    }
+
+    span.button-gray {
+        #button();
+        background: @gray8;
+        border: 1px solid @gray6;
+        color: @gray1;
+    }
+    span.button-gray:hover {
+        background: @gray7;
+    }
+
+    span.button-green {
+        #button();
+        color: @gray8;
+        background: @button-color;
+        border: 1px solid @button-color;
+    }
+    span.button-green:hover {
+        background: @button-hover-color;
+        border: 1px solid @button-hover-color;
+    }
+}
+
+div.confirm-password {
+    padding-top: @gap5;
+    padding-bottom: @gap5;
+
+    text-align: center;
+
+    div.error {
+        padding-top: @gap1;
+        padding-bottom: @gap1;
+        color: @red3;
+        font-size: @text3;
+    }
+
+    form {
+        text-align: center;
+        font-size: @text4;
+        line-height: 1.5em;
+
+        input.password {
+            border: 1px solid @gray3;
+            margin-left: @gap3;
+            margin-right: @gap3;
+            width: 200px;
+            font-size: @text4;
+            line-height: 1.5em;
+            border-radius: 3px;
+            padding: @gap0;
+        }
+
+        input.submit {
+            #button();
+            color: @gray8;
+            background-color: @green3;
+        }
+    }
+}

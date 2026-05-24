@@ -1,0 +1,24 @@
+{
+    "name": "@shanhuio/homedrv-drv",
+    "version": "0.0.0",
+    "description": "HomeDrive Web UI",
+    "main": "dist/index.js",
+    "scripts": {
+        "test": "echo 'no test' && exit 1"
+    },
+    "author": "Shanhu Tech Inc. <contact@shanhu.io>",
+    "license": "AGPL3",
+    "private": false,
+    "dependencies": {
+        "@shanhuio/htmlgen": "github:shanhuio/lib-htmlgen-ts",
+        "@shanhuio/misc": "github:shanhuio/lib-misc-ts",
+        "@shanhuio/style": "github:shanhuio/lib-style-ts",
+        "@types/jquery": "^3.5.16",
+        "@types/react": "^17.0.52",
+        "@types/react-dom": "^17.0.18",
+        "esbuild": "^0.12.29",
+        "jquery": "^3.6.3",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2"
+    }
+}
