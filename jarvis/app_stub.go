@@ -1,7 +1,7 @@
 package jarvis
 
 import (
-	"shanhu.io/homedrv/drv/homeapp"
+	"shanhu.io/drv/homeapp"
 )
 
 type appMaker interface {

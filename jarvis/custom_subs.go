@@ -9,7 +9,7 @@ import (
 	"shanhu.io/g/httputil"
 	"shanhu.io/g/nameutil"
 	"shanhu.io/g/settings"
-	"shanhu.io/homedrv/drv/homeapp"
+	"shanhu.io/drv/homeapp"
 )
 
 func loadCustomSubs(s settings.Settings) (map[string]string, error) {

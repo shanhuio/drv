@@ -6,8 +6,8 @@ import (
 
 	"shanhu.io/g/dock"
 	"shanhu.io/g/errcode"
-	"shanhu.io/homedrv/drv/homeapp/apputil"
-	"shanhu.io/homedrv/drv/homeboot"
+	"shanhu.io/drv/homeapp/apputil"
+	"shanhu.io/drv/homeboot"
 )
 
 func killOldCoreIfExist(d *drive) error {

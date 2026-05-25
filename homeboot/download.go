@@ -9,8 +9,8 @@ import (
 	"shanhu.io/g/dock"
 	"shanhu.io/g/errcode"
 	"shanhu.io/g/httputil"
-	"shanhu.io/homedrv/drv/drvapi"
-	drvcfg "shanhu.io/homedrv/drv/drvconfig"
+	"shanhu.io/drv/drvapi"
+	drvcfg "shanhu.io/drv/drvconfig"
 )
 
 // Downloader is a downloader for downloading docker images.

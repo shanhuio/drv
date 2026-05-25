@@ -1,7 +1,7 @@
 package jarvis
 
 import (
-	"shanhu.io/homedrv/drv/drvapi"
+	"shanhu.io/drv/drvapi"
 )
 
 func makeManifest(metas []*drvapi.AppMeta) map[string]*drvapi.AppMeta {

@@ -11,11 +11,11 @@ import (
 	"shanhu.io/g/httputil"
 	"shanhu.io/g/osutil"
 	"shanhu.io/g/settings"
-	"shanhu.io/homedrv/drv/burmilla"
-	drvcfg "shanhu.io/homedrv/drv/drvconfig"
-	"shanhu.io/homedrv/drv/homeapp"
-	"shanhu.io/homedrv/drv/homeboot"
-	"shanhu.io/homedrv/drv/homedial"
+	"shanhu.io/drv/burmilla"
+	drvcfg "shanhu.io/drv/drvconfig"
+	"shanhu.io/drv/homeapp"
+	"shanhu.io/drv/homeboot"
+	"shanhu.io/drv/homedial"
 )
 
 type kernel struct {

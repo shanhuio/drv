@@ -5,7 +5,7 @@ import (
 
 	"shanhu.io/g/errcode"
 	"shanhu.io/g/settings"
-	"shanhu.io/homedrv/drv/drvapi"
+	"shanhu.io/drv/drvapi"
 )
 
 type appsState struct {

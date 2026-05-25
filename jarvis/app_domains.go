@@ -5,7 +5,7 @@ import (
 
 	"shanhu.io/g/errcode"
 	"shanhu.io/g/pisces"
-	"shanhu.io/homedrv/drv/homeapp"
+	"shanhu.io/drv/homeapp"
 )
 
 type appDomains struct {

@@ -1,4 +1,4 @@
-module shanhu.io/homedrv/drv
+module shanhu.io/drv
 
 go 1.25.1
 

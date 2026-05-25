@@ -2,7 +2,7 @@
 package main
 
 import (
-	"shanhu.io/homedrv/drv/doorway"
+	"shanhu.io/drv/doorway"
 )
 
 func main() { doorway.Main() }

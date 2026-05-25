@@ -9,8 +9,8 @@ import (
 	"shanhu.io/g/errcode"
 	"shanhu.io/g/https/httpstest"
 	"shanhu.io/g/sniproxy"
-	fabdial "shanhu.io/homedrv/drv/fabricsdial"
-	"shanhu.io/homedrv/drv/homedial"
+	fabdial "shanhu.io/drv/fabricsdial"
+	"shanhu.io/drv/homedial"
 )
 
 // FabricsConfig has the configuration for connecting HomeDrive Fabrics.

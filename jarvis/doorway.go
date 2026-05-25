@@ -8,9 +8,9 @@ import (
 	"shanhu.io/g/errcode"
 	"shanhu.io/g/rsautil"
 	"shanhu.io/g/tarutil"
-	doorwaypkg "shanhu.io/homedrv/drv/doorway"
-	"shanhu.io/homedrv/drv/drvapi"
-	drvcfg "shanhu.io/homedrv/drv/drvconfig"
+	doorwaypkg "shanhu.io/drv/doorway"
+	"shanhu.io/drv/drvapi"
+	drvcfg "shanhu.io/drv/drvconfig"
 )
 
 const (

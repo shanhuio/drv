@@ -3,7 +3,7 @@ package homeapp
 import (
 	"shanhu.io/g/dock"
 	"shanhu.io/g/settings"
-	drvcfg "shanhu.io/homedrv/drv/drvconfig"
+	drvcfg "shanhu.io/drv/drvconfig"
 )
 
 // Core provides the core interface to run an application.

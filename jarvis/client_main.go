@@ -12,7 +12,7 @@ import (
 	"shanhu.io/g/jsonutil"
 	"shanhu.io/g/jsonx"
 	"shanhu.io/g/subcmd"
-	"shanhu.io/homedrv/drv/drvapi"
+	"shanhu.io/drv/drvapi"
 )
 
 func clientCommands() *subcmd.List {

@@ -3,7 +3,7 @@ package jarvis
 import (
 	"testing"
 
-	"shanhu.io/homedrv/drv/drvapi"
+	"shanhu.io/drv/drvapi"
 )
 
 func TestManifestFromRelease(t *testing.T) {

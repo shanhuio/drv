@@ -10,9 +10,9 @@ import (
 	"shanhu.io/g/osutil"
 	"shanhu.io/g/settings"
 	"shanhu.io/g/signer"
-	"shanhu.io/homedrv/drv/drvapi"
-	drvcfg "shanhu.io/homedrv/drv/drvconfig"
-	"shanhu.io/homedrv/drv/homeapp"
+	"shanhu.io/drv/drvapi"
+	drvcfg "shanhu.io/drv/drvconfig"
+	"shanhu.io/drv/homeapp"
 )
 
 type server struct {

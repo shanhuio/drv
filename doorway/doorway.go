@@ -11,7 +11,7 @@ import (
 	"shanhu.io/g/errcode"
 	"shanhu.io/g/netutil"
 	"shanhu.io/g/sniproxy"
-	fabdial "shanhu.io/homedrv/drv/fabricsdial"
+	fabdial "shanhu.io/drv/fabricsdial"
 )
 
 // Config is the config of a doorway.

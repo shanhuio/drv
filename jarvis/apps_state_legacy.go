@@ -2,10 +2,10 @@ package jarvis
 
 import (
 	"shanhu.io/g/errcode"
-	"shanhu.io/homedrv/drv/drvapi"
-	"shanhu.io/homedrv/drv/homeapp/nextcloud"
-	"shanhu.io/homedrv/drv/homeapp/postgres"
-	"shanhu.io/homedrv/drv/homeapp/redis"
+	"shanhu.io/drv/drvapi"
+	"shanhu.io/drv/homeapp/nextcloud"
+	"shanhu.io/drv/homeapp/postgres"
+	"shanhu.io/drv/homeapp/redis"
 )
 
 func appsStateForLegacyUpgrade(reg *appRegistry) (

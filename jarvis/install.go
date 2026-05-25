@@ -8,9 +8,9 @@ import (
 	"shanhu.io/g/errcode"
 	"shanhu.io/g/jsonx"
 	"shanhu.io/g/settings"
-	"shanhu.io/homedrv/drv/drvapi"
-	"shanhu.io/homedrv/drv/homeapp"
-	"shanhu.io/homedrv/drv/homeapp/nextcloud"
+	"shanhu.io/drv/drvapi"
+	"shanhu.io/drv/homeapp"
+	"shanhu.io/drv/homeapp/nextcloud"
 )
 
 func endpointInitConfig(d *drive) (*drvapi.EndpointInitConfig, error) {

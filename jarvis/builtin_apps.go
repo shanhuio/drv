@@ -2,10 +2,10 @@ package jarvis
 
 import (
 	"shanhu.io/g/errcode"
-	"shanhu.io/homedrv/drv/homeapp"
-	"shanhu.io/homedrv/drv/homeapp/nextcloud"
-	"shanhu.io/homedrv/drv/homeapp/postgres"
-	"shanhu.io/homedrv/drv/homeapp/redis"
+	"shanhu.io/drv/homeapp"
+	"shanhu.io/drv/homeapp/nextcloud"
+	"shanhu.io/drv/homeapp/postgres"
+	"shanhu.io/drv/homeapp/redis"
 )
 
 type builtInApps struct {

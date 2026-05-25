@@ -9,8 +9,8 @@ import (
 	"shanhu.io/g/dock"
 	"shanhu.io/g/errcode"
 	"shanhu.io/g/jsonutil"
-	"shanhu.io/homedrv/drv/drvapi"
-	"shanhu.io/homedrv/drv/semver"
+	"shanhu.io/drv/drvapi"
+	"shanhu.io/drv/semver"
 )
 
 type builder struct {

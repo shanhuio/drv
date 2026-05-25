@@ -5,8 +5,8 @@ import (
 	"io"
 
 	"shanhu.io/g/errcode"
-	"shanhu.io/homedrv/drv/drvapi"
-	"shanhu.io/homedrv/drv/homeboot"
+	"shanhu.io/drv/drvapi"
+	"shanhu.io/drv/homeboot"
 )
 
 func noOpenDockerInManual(_, _ string) (io.ReadCloser, error) {

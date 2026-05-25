@@ -5,10 +5,10 @@ import (
 
 	"shanhu.io/g/dock"
 	"shanhu.io/g/errcode"
-	drvcfg "shanhu.io/homedrv/drv/drvconfig"
-	"shanhu.io/homedrv/drv/homeapp"
-	"shanhu.io/homedrv/drv/homeapp/postgres"
-	"shanhu.io/homedrv/drv/homeapp/redis"
+	drvcfg "shanhu.io/drv/drvconfig"
+	"shanhu.io/drv/homeapp"
+	"shanhu.io/drv/homeapp/postgres"
+	"shanhu.io/drv/homeapp/redis"
 )
 
 type extraMount struct {

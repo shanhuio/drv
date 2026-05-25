@@ -5,7 +5,7 @@ import (
 	"shanhu.io/g/errcode"
 	"shanhu.io/g/osutil"
 	"shanhu.io/g/tarutil"
-	drvcfg "shanhu.io/homedrv/drv/drvconfig"
+	drvcfg "shanhu.io/drv/drvconfig"
 )
 
 // CoreMount is the mount point of jarvis volume.

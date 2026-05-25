@@ -6,7 +6,7 @@ import (
 
 	"shanhu.io/g/dock"
 	"shanhu.io/g/errcode"
-	"shanhu.io/homedrv/drv/drvapi"
+	"shanhu.io/drv/drvapi"
 )
 
 func releaseImagesToKeep(r *drvapi.Release) map[string]bool {

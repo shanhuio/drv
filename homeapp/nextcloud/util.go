@@ -8,7 +8,7 @@ import (
 
 	"shanhu.io/g/dock"
 	"shanhu.io/g/errcode"
-	"shanhu.io/homedrv/drv/executil"
+	"shanhu.io/drv/executil"
 )
 
 func configSaysInstalled(config []byte) bool {

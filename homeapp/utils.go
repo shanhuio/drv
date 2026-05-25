@@ -1,7 +1,7 @@
 package homeapp
 
 import (
-	"shanhu.io/homedrv/drv/drvapi"
+	"shanhu.io/drv/drvapi"
 )
 
 // Image returns the image of an app based on its meta information.

@@ -6,7 +6,7 @@ import (
 
 	"shanhu.io/g/aries"
 	"shanhu.io/g/errcode"
-	"shanhu.io/homedrv/drv/homeapp/nextcloud"
+	"shanhu.io/drv/homeapp/nextcloud"
 )
 
 func serveLogin(s *server, c *aries.C) error {

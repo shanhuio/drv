@@ -7,7 +7,7 @@ import (
 	"shanhu.io/g/bosinit"
 	"shanhu.io/g/errcode"
 	"shanhu.io/g/tarutil"
-	"shanhu.io/homedrv/drv/burmilla"
+	"shanhu.io/drv/burmilla"
 )
 
 type sshKeys struct {

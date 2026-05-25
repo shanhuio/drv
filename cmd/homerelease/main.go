@@ -1,7 +1,7 @@
 package main
 
 import (
-	"shanhu.io/homedrv/drv/homerelease"
+	"shanhu.io/drv/homerelease"
 )
 
 func main() { homerelease.Main() }

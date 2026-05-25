@@ -4,8 +4,8 @@ import (
 	"net/url"
 
 	"shanhu.io/g/errcode"
-	"shanhu.io/homedrv/drv/burmilla"
-	"shanhu.io/homedrv/drv/homeapp/nextcloud"
+	"shanhu.io/drv/burmilla"
+	"shanhu.io/drv/homeapp/nextcloud"
 )
 
 // DashboardOverviewData contains the data for dashboard overview.

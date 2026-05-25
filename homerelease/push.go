@@ -6,7 +6,7 @@ import (
 	"shanhu.io/g/creds"
 	"shanhu.io/g/errcode"
 	"shanhu.io/g/jsonutil"
-	"shanhu.io/homedrv/drv/drvapi"
+	"shanhu.io/drv/drvapi"
 )
 
 func cmdPush(server string, args []string) error {
