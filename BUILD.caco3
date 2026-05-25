@@ -36,8 +36,9 @@ file_set {
     Name: "all_files",
     Select: ["**"],
     Ignore: [
-        "_",
-        "jarvis/web/**",
+        "_/",
+        "jarvis/web/",
+        "dockers/",
         "*.caco3",
         "LICENSE",
         "sums.jsonx",
@@ -47,5 +48,6 @@ file_set {
 sub_builds {
     Dirs: [
         "jarvis/web",
+        "dockers",
     ],
 }
