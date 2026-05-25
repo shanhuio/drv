@@ -1,0 +1,12 @@
+repo {
+    Name: "shanhu.io/drv",
+}
+
+repo_map {
+    GitHosting: {
+        "shanhu.io": "git.shanhu.io",
+    },
+    Src: {
+        "shanhu.io/lib/dockers": "",
+    },
+}
