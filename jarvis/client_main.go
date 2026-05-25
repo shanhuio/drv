@@ -104,7 +104,7 @@ func cmdSettings(args []string) error {
 	}
 
 	k := args[0]
-	var v interface{}
+	var v any
 	if err := d.settings.Get(k, &v); err != nil {
 		return err
 	}

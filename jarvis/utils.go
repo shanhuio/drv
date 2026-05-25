@@ -14,7 +14,7 @@ import (
 )
 
 func addJSONXToTarStream(
-	s *tarutil.Stream, f string, m *tarutil.Meta, obj interface{},
+	s *tarutil.Stream, f string, m *tarutil.Meta, obj any,
 ) error {
 	bs, err := jsonx.Marshal(obj)
 	if err != nil {

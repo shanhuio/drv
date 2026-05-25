@@ -36,7 +36,7 @@ func newLogEntry(user, text string) *LogEntry {
 	return newLogEntryAt(time.Now(), user, text)
 }
 
-func (e *LogEntry) setJSONValue(typ string, v interface{}) error {
+func (e *LogEntry) setJSONValue(typ string, v any) error {
 	bs, err := json.Marshal(v)
 	if err != nil {
 		return err

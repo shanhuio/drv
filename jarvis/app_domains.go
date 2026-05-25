@@ -36,8 +36,8 @@ func (b *appDomains) Clear(app string) error {
 func (b *appDomains) list() ([]*homeapp.DomainMap, error) {
 	var maps []*homeapp.DomainMap
 	it := &pisces.Iter{
-		Make: func() interface{} { return new(homeapp.DomainMap) },
-		Do: func(_ string, v interface{}) error {
+		Make: func() any { return new(homeapp.DomainMap) },
+		Do: func(_ string, v any) error {
 			maps = append(maps, v.(*homeapp.DomainMap))
 			return nil
 		},

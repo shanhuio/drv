@@ -54,7 +54,7 @@ func (b *users) remove(user string) error      { return b.t.Remove(user) }
 
 func (b *users) mutate(user string, f func(info *userInfo) error) error {
 	info := new(userInfo)
-	return b.t.Mutate(user, info, func(v interface{}) error {
+	return b.t.Mutate(user, info, func(v any) error {
 		return f(v.(*userInfo))
 	})
 }

@@ -99,8 +99,8 @@ func (b *securityLogs) list(page int) ([]*LogEntry, error) {
 	}
 	var entries []*LogEntry
 	it := &pisces.Iter{
-		Make: func() interface{} { return new(LogEntry) },
-		Do: func(_ string, v interface{}) error {
+		Make: func() any { return new(LogEntry) },
+		Do: func(_ string, v any) error {
 			entries = append(entries, v.(*LogEntry))
 			return nil
 		},
