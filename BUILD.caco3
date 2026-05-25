@@ -35,6 +35,13 @@ docker_run {
 file_set {
     Name: "all_files",
     Select: ["**"],
+    Ignore: [
+        "_",
+        "jarvis/web/**",
+        "*.caco3",
+        "LICENSE",
+        "sums.jsonx",
+    ],
 }
 
 sub_builds {
