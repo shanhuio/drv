@@ -1,9 +1,9 @@
 package jarvis
 
 import (
+	drvcfg "shanhu.io/drv/drvconfig"
 	"shanhu.io/g/jsonx"
 	"shanhu.io/g/osutil"
-	drvcfg "shanhu.io/drv/drvconfig"
 )
 
 func readConfig(h *osutil.Home) (*drvcfg.Config, error) {

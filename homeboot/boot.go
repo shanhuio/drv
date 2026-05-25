@@ -10,6 +10,8 @@ import (
 	"runtime"
 	"strings"
 
+	"shanhu.io/drv/drvapi"
+	drvcfg "shanhu.io/drv/drvconfig"
 	"shanhu.io/g/creds"
 	"shanhu.io/g/dock"
 	"shanhu.io/g/errcode"
@@ -18,8 +20,6 @@ import (
 	"shanhu.io/g/jsonx"
 	"shanhu.io/g/rsautil"
 	"shanhu.io/g/tarutil"
-	"shanhu.io/drv/drvapi"
-	drvcfg "shanhu.io/drv/drvconfig"
 )
 
 // BootConfig is a JSON marshallable file that is saved on

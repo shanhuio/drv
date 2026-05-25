@@ -4,9 +4,9 @@ import (
 	"io"
 	"path"
 
+	"shanhu.io/drv/drvapi"
 	"shanhu.io/g/errcode"
 	"shanhu.io/g/httputil"
-	"shanhu.io/drv/drvapi"
 )
 
 // FetchChannelRelease fetch the release from a particular channel.

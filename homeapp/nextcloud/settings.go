@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"sort"
 
-	"shanhu.io/g/errcode"
-	"shanhu.io/g/settings"
 	"shanhu.io/drv/homeapp"
 	"shanhu.io/drv/homeapp/apputil"
 	"shanhu.io/drv/homeapp/redis"
+	"shanhu.io/g/errcode"
+	"shanhu.io/g/settings"
 )
 
 // Domains reads the nextcloud domains from the settings.

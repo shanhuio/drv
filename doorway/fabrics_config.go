@@ -6,11 +6,11 @@ import (
 	"net/http"
 
 	"github.com/gorilla/websocket"
+	fabdial "shanhu.io/drv/fabricsdial"
+	"shanhu.io/drv/homedial"
 	"shanhu.io/g/errcode"
 	"shanhu.io/g/https/httpstest"
 	"shanhu.io/g/sniproxy"
-	fabdial "shanhu.io/drv/fabricsdial"
-	"shanhu.io/drv/homedial"
 )
 
 // FabricsConfig has the configuration for connecting HomeDrive Fabrics.

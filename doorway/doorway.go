@@ -7,11 +7,11 @@ import (
 	"net"
 	"net/http"
 
+	fabdial "shanhu.io/drv/fabricsdial"
 	"shanhu.io/g/aries"
 	"shanhu.io/g/errcode"
 	"shanhu.io/g/netutil"
 	"shanhu.io/g/sniproxy"
-	fabdial "shanhu.io/drv/fabricsdial"
 )
 
 // Config is the config of a doorway.

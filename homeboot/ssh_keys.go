@@ -3,10 +3,10 @@ package homeboot
 import (
 	"net/url"
 
+	"shanhu.io/drv/drvapi"
 	"shanhu.io/g/bosinit"
 	"shanhu.io/g/errcode"
 	"shanhu.io/g/httputil"
-	"shanhu.io/drv/drvapi"
 )
 
 func fetchUserKeys(user string) ([]string, error) {

@@ -5,17 +5,17 @@ import (
 	"net/url"
 	"strings"
 
+	"shanhu.io/drv/burmilla"
+	drvcfg "shanhu.io/drv/drvconfig"
+	"shanhu.io/drv/homeapp"
+	"shanhu.io/drv/homeboot"
+	"shanhu.io/drv/homedial"
 	"shanhu.io/g/creds"
 	"shanhu.io/g/dock"
 	"shanhu.io/g/errcode"
 	"shanhu.io/g/httputil"
 	"shanhu.io/g/osutil"
 	"shanhu.io/g/settings"
-	"shanhu.io/drv/burmilla"
-	drvcfg "shanhu.io/drv/drvconfig"
-	"shanhu.io/drv/homeapp"
-	"shanhu.io/drv/homeboot"
-	"shanhu.io/drv/homedial"
 )
 
 type kernel struct {

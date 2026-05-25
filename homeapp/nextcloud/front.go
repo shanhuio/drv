@@ -1,12 +1,12 @@
 package nextcloud
 
 import (
-	"shanhu.io/g/dock"
-	"shanhu.io/g/errcode"
 	"shanhu.io/drv/drvapi"
 	drvcfg "shanhu.io/drv/drvconfig"
 	"shanhu.io/drv/homeapp"
 	"shanhu.io/drv/homeapp/apputil"
+	"shanhu.io/g/dock"
+	"shanhu.io/g/errcode"
 )
 
 // Front is the ncfront app.
