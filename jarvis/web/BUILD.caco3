@@ -7,7 +7,7 @@ docker_run {
         "caco3-build.sh": "/opt/node/caco3-build.sh",
     },
     Output: {
-        "jarvis.zip": "/opt/node/drv-ts/jarvis.zip",
+        "jarvis.zip": "/opt/node/web/jarvis.zip",
     },
     Deps: ["src"],
 }
