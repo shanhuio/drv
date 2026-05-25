@@ -6,15 +6,14 @@ import (
 	"runtime"
 	"time"
 
+	"shanhu.io/drv/drvapi"
+	"shanhu.io/drv/semver"
 	"shanhu.io/g/dock"
 	"shanhu.io/g/errcode"
 	"shanhu.io/g/jsonutil"
-	"shanhu.io/drv/drvapi"
-	"shanhu.io/drv/semver"
 )
 
 type builder struct {
-	src string
 	out string
 }
 
@@ -30,7 +29,7 @@ const (
 
 func (b *builder) buildRelease(name string) error {
 	arts := new(drvapi.Artifacts)
-	const repo = "shanhu.io/homedrv/dockers"
+	const repo = "shanhu.io/drv/dockers"
 
 	images := make(map[string]*dockerImage)
 	imageObjs := make(map[string]string)
@@ -178,13 +177,11 @@ func (b *builder) buildRelease(name string) error {
 
 func cmdBuild(args []string) error {
 	flags := cmdFlags.New()
-	src := flags.String("src", "src", "source directory")
-	out := flags.String("out", "out", "output directory")
+	out := flags.String("out", "_/out", "output directory")
 	name := flags.String("name", "", "release name")
 	_ = flags.ParseArgs(args)
 
 	b := &builder{
-		src: *src,
 		out: *out,
 	}
 
