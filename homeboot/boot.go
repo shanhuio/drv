@@ -2,11 +2,8 @@ package homeboot
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/url"
-	"os"
-	"path/filepath"
 	"runtime"
 	"strings"
 
@@ -96,16 +93,6 @@ type boot struct {
 
 func newBoot(config *BootConfig) *boot {
 	return &boot{BootConfig: config}
-}
-
-func writeFile(f string, bs []byte, mode os.FileMode) error {
-	dir := filepath.Dir(f)
-	if dir != "" && dir != "." {
-		if err := os.MkdirAll(dir, 0700); err != nil {
-			return errcode.Annotate(err, "make key directory")
-		}
-	}
-	return ioutil.WriteFile(f, bs, mode)
 }
 
 func (b *boot) downloadCore(
