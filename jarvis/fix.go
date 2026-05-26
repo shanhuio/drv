@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"shanhu.io/drv/homeapp/nextcloud"
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 func fixThings(d *drive) {

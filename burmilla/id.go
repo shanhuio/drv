@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"strings"
 
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 func parseIDOutput(bs []byte) (int, error) {

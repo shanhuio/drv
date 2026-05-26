@@ -7,8 +7,8 @@ import (
 	drvcfg "shanhu.io/drv/drvconfig"
 	"shanhu.io/drv/homeboot"
 	"shanhu.io/g/aries"
-	"shanhu.io/g/errcode"
 	"shanhu.io/g/osutil"
+	"shanhu.io/std/errcode"
 
 	_ "github.com/lib/pq"  // for postgres
 	_ "modernc.org/sqlite" // sqlite db driver

@@ -1,8 +1,8 @@
 package homeboot
 
 import (
-	"shanhu.io/g/errcode"
 	"shanhu.io/g/osutil"
+	"shanhu.io/std/errcode"
 )
 
 const systemDockSock = "/var/run/system-docker.sock"

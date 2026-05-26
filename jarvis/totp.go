@@ -10,8 +10,8 @@ import (
 	"github.com/pquerna/otp"
 	totppkg "github.com/pquerna/otp/totp"
 	"shanhu.io/g/aries"
-	"shanhu.io/g/errcode"
 	"shanhu.io/g/signer"
+	"shanhu.io/std/errcode"
 )
 
 const (

@@ -5,7 +5,7 @@ import (
 	"log"
 
 	"shanhu.io/g/dock"
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 // ErrSameImage is returned when there is no image change.

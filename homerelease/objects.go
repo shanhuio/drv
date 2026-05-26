@@ -4,8 +4,8 @@ import (
 	"os"
 	"sort"
 
-	"shanhu.io/g/errcode"
 	"shanhu.io/g/tarutil"
+	"shanhu.io/std/errcode"
 )
 
 func writeObjects(p string, objects map[string]string) error {

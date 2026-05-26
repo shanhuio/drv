@@ -7,8 +7,8 @@ import (
 	"os"
 	"path"
 
-	"shanhu.io/g/errcode"
 	"shanhu.io/g/httputil"
+	"shanhu.io/std/errcode"
 )
 
 // Uploader is an object uploader.

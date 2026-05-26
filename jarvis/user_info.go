@@ -3,7 +3,7 @@ package jarvis
 import (
 	"golang.org/x/crypto/bcrypt"
 	"shanhu.io/g/argon2"
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 type userInfo struct {

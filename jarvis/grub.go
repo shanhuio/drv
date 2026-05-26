@@ -10,8 +10,8 @@ import (
 
 	drvcfg "shanhu.io/drv/drvconfig"
 	"shanhu.io/g/dock"
-	"shanhu.io/g/errcode"
 	"shanhu.io/g/osutil"
+	"shanhu.io/std/errcode"
 )
 
 var grubConfigTmpl = template.Must(template.New("grubcfg").Parse(`

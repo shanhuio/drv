@@ -5,7 +5,7 @@ import (
 	"shanhu.io/drv/homeapp/nextcloud"
 	"shanhu.io/drv/homeapp/postgres"
 	"shanhu.io/drv/homeapp/redis"
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 type builtInApps struct {

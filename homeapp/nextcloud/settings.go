@@ -7,8 +7,8 @@ import (
 	"shanhu.io/drv/homeapp"
 	"shanhu.io/drv/homeapp/apputil"
 	"shanhu.io/drv/homeapp/redis"
-	"shanhu.io/g/errcode"
 	"shanhu.io/g/settings"
+	"shanhu.io/std/errcode"
 )
 
 // Domains reads the nextcloud domains from the settings.

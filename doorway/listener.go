@@ -3,7 +3,7 @@ package doorway
 import (
 	"net"
 
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 type localListenConfig struct {

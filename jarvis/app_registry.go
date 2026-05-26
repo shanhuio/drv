@@ -2,7 +2,7 @@ package jarvis
 
 import (
 	"shanhu.io/drv/drvapi"
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 type appRegistry struct {

@@ -6,7 +6,7 @@ import (
 	"shanhu.io/drv/homeapp"
 	"shanhu.io/drv/homeapp/apputil"
 	"shanhu.io/g/dock"
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 // Front is the ncfront app.

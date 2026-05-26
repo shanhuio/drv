@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"shanhu.io/g/dock"
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 type status struct {

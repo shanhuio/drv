@@ -2,7 +2,7 @@ package jarvis
 
 import (
 	"shanhu.io/g/aries"
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 // DashboardTOTPData contains data for TOTP 2FA method.

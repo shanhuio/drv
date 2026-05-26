@@ -5,7 +5,7 @@ import (
 
 	"shanhu.io/drv/burmilla"
 	"shanhu.io/drv/homeapp/nextcloud"
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 // DashboardOverviewData contains the data for dashboard overview.

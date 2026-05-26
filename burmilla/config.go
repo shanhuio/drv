@@ -7,8 +7,8 @@ import (
 
 	"shanhu.io/g/bosinit"
 	"shanhu.io/g/dock"
-	"shanhu.io/g/errcode"
 	"shanhu.io/g/strutil"
+	"shanhu.io/std/errcode"
 )
 
 // ConfigExport exports the Bumilla OS's configuration.

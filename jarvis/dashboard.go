@@ -4,8 +4,8 @@ import (
 	"strings"
 
 	"shanhu.io/g/aries"
-	"shanhu.io/g/errcode"
 	"shanhu.io/g/timeutil"
+	"shanhu.io/std/errcode"
 )
 
 // DashboardDataRequest is the AJAX request to load dashboard data.

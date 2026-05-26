@@ -10,8 +10,8 @@ import (
 	"shanhu.io/drv/homeapp"
 	"shanhu.io/drv/homeapp/apputil"
 	"shanhu.io/g/dock"
-	"shanhu.io/g/errcode"
 	"shanhu.io/g/sqlx"
+	"shanhu.io/std/errcode"
 )
 
 // Name is the app's name.

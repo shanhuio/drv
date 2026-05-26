@@ -5,7 +5,7 @@ import (
 
 	"shanhu.io/drv/homeapp/nextcloud"
 	"shanhu.io/g/aries"
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 type adminTasks struct {

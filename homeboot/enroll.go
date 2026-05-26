@@ -4,7 +4,7 @@ import (
 	"io/ioutil"
 	"net/url"
 
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 func cmdEnroll(args []string) error {

@@ -12,7 +12,7 @@ import (
 	"golang.org/x/crypto/acme/autocert"
 	"shanhu.io/g/aries"
 	"shanhu.io/g/certutil"
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 // ServerConfig is the config for serving the reverse proxy

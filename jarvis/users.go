@@ -7,8 +7,8 @@ import (
 
 	"shanhu.io/g/argon2"
 	"shanhu.io/g/aries"
-	"shanhu.io/g/errcode"
 	"shanhu.io/g/pisces"
+	"shanhu.io/std/errcode"
 )
 
 func hashPassword(password string) (*argon2.Password, error) {

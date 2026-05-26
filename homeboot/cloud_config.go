@@ -6,8 +6,8 @@ import (
 	"text/template"
 
 	"shanhu.io/g/bosinit"
-	"shanhu.io/g/errcode"
 	"shanhu.io/g/jsonx"
+	"shanhu.io/std/errcode"
 )
 
 const rcLocal = `#!/bin/bash

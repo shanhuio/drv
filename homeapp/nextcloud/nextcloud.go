@@ -10,8 +10,8 @@ import (
 	"shanhu.io/drv/homeapp/postgres"
 	"shanhu.io/drv/semver"
 	"shanhu.io/g/dock"
-	"shanhu.io/g/errcode"
 	"shanhu.io/g/settings"
+	"shanhu.io/std/errcode"
 )
 
 // Nextcloud is the Nextcloud app.

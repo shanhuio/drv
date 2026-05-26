@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"shanhu.io/g/creds"
-	"shanhu.io/g/errcode"
 	"shanhu.io/g/rand"
+	"shanhu.io/std/errcode"
 )
 
 // MakeReleaseName makes a new release name.

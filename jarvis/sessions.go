@@ -4,9 +4,9 @@ import (
 	"time"
 
 	"shanhu.io/g/aries"
-	"shanhu.io/g/errcode"
 	"shanhu.io/g/hashutil"
 	"shanhu.io/g/signer"
+	"shanhu.io/std/errcode"
 )
 
 const sudoSessionsCookie = "sudo"

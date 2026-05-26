@@ -9,8 +9,8 @@ import (
 	"shanhu.io/drv/drvapi"
 	"shanhu.io/drv/homeapp/apputil"
 	"shanhu.io/drv/homeboot"
-	"shanhu.io/g/errcode"
 	"shanhu.io/g/httputil"
+	"shanhu.io/std/errcode"
 )
 
 func updateAppsAndDoorway(d *drive, r *drvapi.Release) error {

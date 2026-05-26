@@ -3,7 +3,7 @@ package jarvis
 import (
 	"strings"
 
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 type bosListEntry struct {

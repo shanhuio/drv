@@ -12,10 +12,10 @@ import (
 	"shanhu.io/drv/homedial"
 	"shanhu.io/g/creds"
 	"shanhu.io/g/dock"
-	"shanhu.io/g/errcode"
 	"shanhu.io/g/httputil"
 	"shanhu.io/g/osutil"
 	"shanhu.io/g/settings"
+	"shanhu.io/std/errcode"
 )
 
 type kernel struct {

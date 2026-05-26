@@ -3,7 +3,7 @@ package jarvis
 import (
 	"time"
 
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 const failureWindow = 3 * time.Minute

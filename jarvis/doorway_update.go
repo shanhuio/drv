@@ -6,8 +6,8 @@ import (
 	"shanhu.io/drv/drvapi"
 	"shanhu.io/drv/homeapp"
 	"shanhu.io/g/dock"
-	"shanhu.io/g/errcode"
 	"shanhu.io/g/settings"
+	"shanhu.io/std/errcode"
 )
 
 func loadDoorwayConfig(d *drive) (*doorwayConfig, error) {

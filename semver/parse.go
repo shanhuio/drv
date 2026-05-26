@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"strings"
 
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 // Major returns the major version number of a version string.

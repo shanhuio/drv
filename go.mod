@@ -9,6 +9,7 @@ require (
 	golang.org/x/crypto v0.52.0
 	modernc.org/sqlite v1.50.1
 	shanhu.io/g v0.0.0-20260526131332-d9d364904fc0
+	shanhu.io/std v0.0.0-20260526124544-ba0f0bc80867
 )
 
 require (
@@ -34,5 +35,4 @@ require (
 	modernc.org/libc v1.72.5 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.11.0 // indirect
-	shanhu.io/std v0.0.0-20260526124544-ba0f0bc80867 // indirect
 )

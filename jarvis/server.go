@@ -8,11 +8,11 @@ import (
 	drvcfg "shanhu.io/drv/drvconfig"
 	"shanhu.io/drv/homeapp"
 	"shanhu.io/g/aries"
-	"shanhu.io/g/errcode"
 	"shanhu.io/g/oauth2"
 	"shanhu.io/g/osutil"
 	"shanhu.io/g/settings"
 	"shanhu.io/g/signer"
+	"shanhu.io/std/errcode"
 )
 
 type server struct {

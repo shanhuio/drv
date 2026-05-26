@@ -14,12 +14,12 @@ import (
 	drvcfg "shanhu.io/drv/drvconfig"
 	"shanhu.io/g/creds"
 	"shanhu.io/g/dock"
-	"shanhu.io/g/errcode"
 	"shanhu.io/g/flagutil"
 	"shanhu.io/g/httputil"
 	"shanhu.io/g/jsonx"
 	"shanhu.io/g/rsautil"
 	"shanhu.io/g/tarutil"
+	"shanhu.io/std/errcode"
 )
 
 // BootConfig is a JSON marshallable file that is saved on

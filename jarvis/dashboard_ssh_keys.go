@@ -4,7 +4,7 @@ import (
 	"strings"
 
 	"shanhu.io/g/aries"
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 // DashboardSSHKeysData contains data for initializing SSH Keys dashboard page.

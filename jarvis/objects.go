@@ -8,9 +8,9 @@ import (
 	"strings"
 
 	"shanhu.io/g/aries"
-	"shanhu.io/g/errcode"
 	"shanhu.io/g/hashutil"
 	"shanhu.io/g/osutil"
+	"shanhu.io/std/errcode"
 )
 
 type objects struct {

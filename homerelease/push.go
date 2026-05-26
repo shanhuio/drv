@@ -5,8 +5,8 @@ import (
 
 	"shanhu.io/drv/drvapi"
 	"shanhu.io/g/creds"
-	"shanhu.io/g/errcode"
 	"shanhu.io/g/jsonutil"
+	"shanhu.io/std/errcode"
 )
 
 func cmdPush(server string, args []string) error {

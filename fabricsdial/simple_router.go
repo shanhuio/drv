@@ -6,7 +6,7 @@ import (
 	"net/url"
 
 	"shanhu.io/g/creds"
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 // SimpleRouter provides a simple endpoint based router. It directly contacts

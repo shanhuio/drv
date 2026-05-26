@@ -4,12 +4,12 @@ import (
 	"log"
 	"time"
 
-	"shanhu.io/g/errcode"
 	"shanhu.io/g/identity"
 	"shanhu.io/g/osutil"
 	"shanhu.io/g/pisces"
 	"shanhu.io/g/rand"
 	"shanhu.io/g/settings"
+	"shanhu.io/std/errcode"
 )
 
 type backend struct {

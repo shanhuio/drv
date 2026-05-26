@@ -9,9 +9,9 @@ import (
 
 	fabdial "shanhu.io/drv/fabricsdial"
 	"shanhu.io/g/aries"
-	"shanhu.io/g/errcode"
 	"shanhu.io/g/netutil"
 	"shanhu.io/g/sniproxy"
+	"shanhu.io/std/errcode"
 )
 
 // Config is the config of a doorway.

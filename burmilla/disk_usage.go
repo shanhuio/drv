@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 // DiskUsage contains disk usage data.

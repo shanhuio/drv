@@ -4,7 +4,7 @@ import (
 	"net/url"
 
 	"shanhu.io/g/aries"
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 func serveSudo(s *server, c *aries.C) error {

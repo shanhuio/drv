@@ -9,7 +9,7 @@ import (
 	"os"
 	"strings"
 
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 type installScript struct {
