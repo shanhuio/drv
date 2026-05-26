@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"strings"
 
+	"shanhu.io/drv/strutil"
 	"shanhu.io/g/bosinit"
-	"shanhu.io/g/strutil"
 	"shanhu.io/std/docker"
 	"shanhu.io/std/errcode"
 )

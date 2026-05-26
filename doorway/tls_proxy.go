@@ -7,9 +7,9 @@ import (
 	"strings"
 
 	"golang.org/x/crypto/acme"
+	"shanhu.io/drv/strutil"
 	"shanhu.io/g/netutil"
 	"shanhu.io/g/sniproxy"
-	"shanhu.io/g/strutil"
 	"shanhu.io/std/errcode"
 )
 
