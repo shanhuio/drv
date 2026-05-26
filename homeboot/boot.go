@@ -131,9 +131,6 @@ func (b *boot) saveDriveConfig(
 	if err != nil {
 		return errcode.Annotate(err, "marshal core config")
 	}
-	if err != nil {
-		return errcode.Annotate(err, "generate core config")
-	}
 	files.AddBytes("config.jsonx", tarutil.ModeMeta(0644), bs)
 	return nil
 }
