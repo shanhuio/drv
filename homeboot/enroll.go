@@ -1,8 +1,8 @@
 package homeboot
 
 import (
-	"io/ioutil"
 	"net/url"
+	"os"
 
 	"shanhu.io/std/errcode"
 )
@@ -29,7 +29,7 @@ func cmdEnroll(args []string) error {
 	if *pubKey == "" {
 		return errcode.InvalidArgf("public key not specified")
 	}
-	pubKeyBytes, err := ioutil.ReadFile(*pubKey)
+	pubKeyBytes, err := os.ReadFile(*pubKey)
 	if err != nil {
 		return errcode.Annotate(err, "read public key")
 	}

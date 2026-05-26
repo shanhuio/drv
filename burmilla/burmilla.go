@@ -2,7 +2,7 @@ package burmilla
 
 import (
 	"bytes"
-	"io/ioutil"
+	"io"
 	"strings"
 
 	"shanhu.io/std/docker"
@@ -44,7 +44,7 @@ func (b *Burmilla) ExecRet(args []string) (int, error) {
 	c := b.Console()
 	return c.ExecWithSetup(&docker.ExecSetup{
 		Cmd:    args,
-		Stdout: ioutil.Discard,
+		Stdout: io.Discard,
 	})
 }
 

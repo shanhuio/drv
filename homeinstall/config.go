@@ -5,7 +5,6 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"strings"
 
@@ -40,7 +39,7 @@ func (s *installScript) writeOut(f string) error {
 		_, err := os.Stdout.Write(bs)
 		return err
 	}
-	return ioutil.WriteFile(f, bs, 0755)
+	return os.WriteFile(f, bs, 0755)
 }
 
 func checkEndpointName(name string) error {
