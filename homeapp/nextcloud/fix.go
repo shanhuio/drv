@@ -4,12 +4,12 @@ import (
 	"io"
 
 	"shanhu.io/drv/semver"
-	"shanhu.io/g/dock"
 	"shanhu.io/g/settings"
+	"shanhu.io/std/docker"
 	"shanhu.io/std/errcode"
 )
 
-func fix(cont *dock.Cont, s settings.Settings) error {
+func fix(cont *docker.Cont, s settings.Settings) error {
 	version, err := readTrueVersion(cont)
 	if err != nil {
 		return errcode.Annotate(err, "get version")
@@ -21,7 +21,7 @@ func fix(cont *dock.Cont, s settings.Settings) error {
 	return fixVersion(cont, s, major)
 }
 
-func fixVersion(cont *dock.Cont, s settings.Settings, major int) error {
+func fixVersion(cont *docker.Cont, s settings.Settings, major int) error {
 	if major >= 30 {
 		// For version 30+, this needs to be executed every time a new
 		// docker is installed.

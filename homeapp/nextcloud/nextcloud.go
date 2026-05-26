@@ -9,8 +9,8 @@ import (
 	"shanhu.io/drv/homeapp/apputil"
 	"shanhu.io/drv/homeapp/postgres"
 	"shanhu.io/drv/semver"
-	"shanhu.io/g/dock"
 	"shanhu.io/g/settings"
+	"shanhu.io/std/docker"
 	"shanhu.io/std/errcode"
 )
 
@@ -22,9 +22,9 @@ type Nextcloud struct {
 // New creates a new Nextcloud app.
 func New(c homeapp.Core) *Nextcloud { return &Nextcloud{core: c} }
 
-func (n *Nextcloud) cont() *dock.Cont {
+func (n *Nextcloud) cont() *docker.Cont {
 	cont := homeapp.Cont(n.core, Name)
-	return dock.NewCont(n.core.Docker(), cont)
+	return docker.NewCont(n.core.Docker(), cont)
 }
 
 func (n *Nextcloud) startWithImage(image string, config *config) error {
@@ -173,7 +173,7 @@ func (n *Nextcloud) Change(from, to *drvapi.AppMeta) error {
 			return errcode.Annotate(err, "drop nextcloud db")
 		}
 		vol := homeapp.Vol(n.core, Name)
-		if err := dock.RemoveVolume(n.core.Docker(), vol); err != nil {
+		if err := docker.RemoveVolume(n.core.Docker(), vol); err != nil {
 			return errcode.Annotate(err, "remove volume")
 		}
 		return nil

@@ -7,9 +7,9 @@ import (
 	drvcfg "shanhu.io/drv/drvconfig"
 	"shanhu.io/drv/homeapp"
 	"shanhu.io/drv/homeapp/apputil"
-	"shanhu.io/g/dock"
-	"shanhu.io/g/tarutil"
+	"shanhu.io/std/docker"
 	"shanhu.io/std/errcode"
+	"shanhu.io/std/tarutil"
 )
 
 // Name is the name of the app.
@@ -26,7 +26,7 @@ type Redis struct {
 // New creates a new redis app.
 func New(c homeapp.Core) *Redis { return &Redis{core: c} }
 
-func (r *Redis) writeConfig(cont *dock.Cont, pwd string) error {
+func (r *Redis) writeConfig(cont *docker.Cont, pwd string) error {
 	confFile := tarutil.NewStream()
 	confContent := fmt.Sprintf("requirepass %q\n", pwd)
 	confFile.AddString("redis.conf", &tarutil.Meta{
@@ -34,14 +34,14 @@ func (r *Redis) writeConfig(cont *dock.Cont, pwd string) error {
 		UserID:  999, // redis docker's uid and gid.
 		GroupID: 999,
 	}, confContent)
-	return dock.CopyInTarStream(cont, confFile, "/etc")
+	return docker.CopyInTarStream(cont, confFile, "/etc")
 }
 
-func (r *Redis) cont() *dock.Cont {
-	return dock.NewCont(r.core.Docker(), homeapp.Cont(r.core, Name))
+func (r *Redis) cont() *docker.Cont {
+	return docker.NewCont(r.core.Docker(), homeapp.Cont(r.core, Name))
 }
 
-func (r *Redis) createCont(image, pwd string) (*dock.Cont, error) {
+func (r *Redis) createCont(image, pwd string) (*docker.Cont, error) {
 	if image == "" {
 		return nil, errcode.InvalidArgf("no image specified")
 	}
@@ -49,16 +49,16 @@ func (r *Redis) createCont(image, pwd string) (*dock.Cont, error) {
 		return nil, errcode.InvalidArgf("redis password empty")
 	}
 
-	config := &dock.ContConfig{
+	config := &docker.ContConfig{
 		Name:          homeapp.Cont(r.core, Name),
 		Network:       homeapp.Network(r.core),
 		AutoRestart:   true,
-		JSONLogConfig: dock.LimitedJSONLog(),
+		JSONLogConfig: docker.LimitedJSONLog(),
 		Cmd:           []string{"redis-server", "/etc/redis.conf"},
 		Labels:        drvcfg.NewNameLabel(Name),
 	}
 
-	cont, err := dock.CreateCont(r.core.Docker(), image, config)
+	cont, err := docker.CreateCont(r.core.Docker(), image, config)
 	if err != nil {
 		return nil, errcode.Annotate(err, "create docker")
 	}
@@ -99,7 +99,7 @@ func (r *Redis) Change(from, to *drvapi.AppMeta) error {
 
 	if to == nil {
 		vol := homeapp.Vol(r.core, Name)
-		if err := dock.RemoveVolume(r.core.Docker(), vol); err != nil {
+		if err := docker.RemoveVolume(r.core.Docker(), vol); err != nil {
 			return errcode.Annotate(err, "remove volume")
 		}
 		return nil

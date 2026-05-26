@@ -7,7 +7,7 @@ import (
 	"shanhu.io/drv/homeapp"
 	"shanhu.io/drv/homeapp/postgres"
 	"shanhu.io/drv/homeapp/redis"
-	"shanhu.io/g/dock"
+	"shanhu.io/std/docker"
 	"shanhu.io/std/errcode"
 )
 
@@ -27,7 +27,7 @@ type config struct {
 
 func networkCIDRs(c homeapp.Core) ([]string, error) {
 	network := homeapp.Network(c)
-	info, err := dock.InspectNetwork(c.Docker(), network)
+	info, err := docker.InspectNetwork(c.Docker(), network)
 	if err != nil {
 		return nil, err
 	}
@@ -43,18 +43,18 @@ func networkCIDRs(c homeapp.Core) ([]string, error) {
 
 func createCont(
 	c homeapp.Core, image string, config *config,
-) (*dock.Cont, error) {
+) (*docker.Cont, error) {
 	if image == "" {
 		return nil, errcode.InvalidArgf("no image specified")
 	}
 	labels := drvcfg.NewNameLabel(Name)
 	volName := homeapp.Vol(c, Name)
 
-	contConfig := &dock.ContConfig{
+	contConfig := &docker.ContConfig{
 		Name:          homeapp.Cont(c, Name),
 		Network:       homeapp.Network(c),
 		AutoRestart:   true,
-		JSONLogConfig: dock.LimitedJSONLog(),
+		JSONLogConfig: docker.LimitedJSONLog(),
 		Labels:        labels,
 	}
 
@@ -63,21 +63,21 @@ func createCont(
 		return nil, errcode.Annotate(err, "list network CIDRs")
 	}
 
-	contConfig.Mounts = append(contConfig.Mounts, &dock.ContMount{
-		Type: dock.MountVolume,
+	contConfig.Mounts = append(contConfig.Mounts, &docker.ContMount{
+		Type: docker.MountVolume,
 		Host: volName,
 		Cont: "/var/www/html",
 	})
 	if config.dataMount != "" {
-		contConfig.Mounts = append(contConfig.Mounts, &dock.ContMount{
-			Type: dock.MountBind,
+		contConfig.Mounts = append(contConfig.Mounts, &docker.ContMount{
+			Type: docker.MountBind,
 			Host: config.dataMount,
 			Cont: "/var/www/html/data",
 		})
 	}
 	for _, extra := range config.extraMounts {
-		contConfig.Mounts = append(contConfig.Mounts, &dock.ContMount{
-			Type: dock.MountBind,
+		contConfig.Mounts = append(contConfig.Mounts, &docker.ContMount{
+			Type: docker.MountBind,
 			Host: extra.host,
 			Cont: extra.container,
 		})
@@ -105,12 +105,12 @@ func createCont(
 	}
 
 	d := c.Docker()
-	if _, err := dock.CreateVolumeIfNotExist(
-		d, volName, &dock.VolumeConfig{Labels: labels},
+	if _, err := docker.CreateVolumeIfNotExist(
+		d, volName, &docker.VolumeConfig{Labels: labels},
 	); err != nil {
 		return nil, errcode.Annotate(err, "create volume")
 	}
-	return dock.CreateCont(d, image, contConfig)
+	return docker.CreateCont(d, image, contConfig)
 }
 
 func start(

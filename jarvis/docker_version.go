@@ -5,10 +5,10 @@ import (
 	"strconv"
 	"strings"
 
-	"shanhu.io/g/dock"
+	"shanhu.io/std/docker"
 )
 
-func checkDockerVersion(v *dock.VersionInfo) error {
+func checkDockerVersion(v *docker.VersionInfo) error {
 	s := v.Version
 	fields := strings.Split(s, ".")
 	if len(fields) < 3 {

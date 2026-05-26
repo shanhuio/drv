@@ -13,13 +13,13 @@ import (
 	"shanhu.io/drv/drvapi"
 	drvcfg "shanhu.io/drv/drvconfig"
 	"shanhu.io/g/creds"
-	"shanhu.io/g/dock"
 	"shanhu.io/g/flagutil"
 	"shanhu.io/g/httputil"
 	"shanhu.io/g/jsonx"
 	"shanhu.io/g/rsautil"
-	"shanhu.io/g/tarutil"
+	"shanhu.io/std/docker"
 	"shanhu.io/std/errcode"
+	"shanhu.io/std/tarutil"
 )
 
 // BootConfig is a JSON marshallable file that is saved on
@@ -109,7 +109,7 @@ func writeFile(f string, bs []byte, mode os.FileMode) error {
 }
 
 func (b *boot) downloadCore(
-	dock *dock.Client, config *drvcfg.Config, pem []byte,
+	dock *docker.Client, config *drvcfg.Config, pem []byte,
 ) (string, error) {
 	drv := b.Drive
 	user := "~" + drv.Name
@@ -164,7 +164,7 @@ func registerEndpoint(server *url.URL, name, code string, pub []byte) error {
 
 func (b *boot) run() error {
 	drv := b.Drive
-	client := dock.NewUnixClient(drv.DockerSock)
+	client := docker.NewUnixClient(drv.DockerSock)
 
 	serverURL, err := url.Parse(drv.Server)
 	if err != nil {
@@ -230,17 +230,17 @@ func (b *boot) run() error {
 }
 
 func (b *boot) startCore(
-	client *dock.Client, config *CoreConfig,
+	client *docker.Client, config *CoreConfig,
 ) (string, error) {
 	network := drvcfg.Network(config.Drive.Naming)
 
-	found, err := dock.HasNetwork(client, network)
+	found, err := docker.HasNetwork(client, network)
 	if err != nil {
 		return "", errcode.Annotatef(err, "check network: %q", network)
 	}
 	if !found {
 		log.Printf("creating network %q ...", network)
-		if err := dock.CreateNetwork(client, network); err != nil {
+		if err := docker.CreateNetwork(client, network); err != nil {
 			return "", errcode.Annotatef(
 				err, "create network: %q", network,
 			)

@@ -11,10 +11,10 @@ import (
 	"shanhu.io/drv/homeboot"
 	"shanhu.io/drv/homedial"
 	"shanhu.io/g/creds"
-	"shanhu.io/g/dock"
 	"shanhu.io/g/httputil"
 	"shanhu.io/g/osutil"
 	"shanhu.io/g/settings"
+	"shanhu.io/std/docker"
 	"shanhu.io/std/errcode"
 )
 
@@ -49,10 +49,10 @@ type drive struct {
 	serverEndpoint *creds.RobotEndpoint
 
 	// Uesr docker client
-	dock *dock.Client
+	dock *docker.Client
 
 	// System docker client
-	sysDock *dock.Client
+	sysDock *docker.Client
 
 	// HomeDrive kernel.
 	*kernel
@@ -118,9 +118,9 @@ func newDrive(config *drvcfg.Config, k *kernel) (*drive, error) {
 	if err != nil {
 		return nil, errcode.Annotate(err, "check if system dock exists")
 	}
-	var sysDock *dock.Client
+	var sysDock *docker.Client
 	if hasSysDock {
-		sysDock = dock.NewUnixClient(sysDockSock)
+		sysDock = docker.NewUnixClient(sysDockSock)
 	}
 
 	tasks := newTaskLoop()
@@ -130,7 +130,7 @@ func newDrive(config *drvcfg.Config, k *kernel) (*drive, error) {
 		server:         server,
 		name:           name,
 		serverEndpoint: ep,
-		dock:           dock.NewUnixClient(userDockSock),
+		dock:           docker.NewUnixClient(userDockSock),
 		sysDock:        sysDock,
 		kernel:         k,
 		tasks:          tasks,
@@ -200,7 +200,7 @@ func (d *drive) downloadConfig() *homeboot.DownloadConfig {
 	}
 }
 
-func (d *drive) Docker() *dock.Client     { return d.dock }
+func (d *drive) Docker() *docker.Client   { return d.dock }
 func (d *drive) Naming() *drvcfg.Naming   { return d.config.Naming }
 func (d *drive) Domains() homeapp.Domains { return d.appDomains }
 
@@ -212,7 +212,7 @@ func (d *drive) Settings() settings.Settings {
 }
 
 func checkSystem(d *drive) error {
-	dockVer, err := dock.Version(d.dock)
+	dockVer, err := docker.Version(d.dock)
 	if err != nil {
 		return errcode.Annotate(err, "get docker version")
 	}

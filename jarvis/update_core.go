@@ -6,12 +6,12 @@ import (
 
 	"shanhu.io/drv/homeapp/apputil"
 	"shanhu.io/drv/homeboot"
-	"shanhu.io/g/dock"
+	"shanhu.io/std/docker"
 	"shanhu.io/std/errcode"
 )
 
 func killOldCoreIfExist(d *drive) error {
-	cont := dock.NewCont(d.dock, d.oldCore())
+	cont := docker.NewCont(d.dock, d.oldCore())
 	ok, err := cont.Exists()
 	if err != nil {
 		return err
@@ -34,7 +34,7 @@ func restartAs(d *drive, img string) error {
 	if err := killOldCoreIfExist(d); err != nil {
 		return errcode.Annotate(err, "kill old core")
 	}
-	if err := dock.RenameCont(
+	if err := docker.RenameCont(
 		d.dock, d.core(), d.oldCore(),
 	); err != nil {
 		return errcode.Annotate(err, "rename core to old")
@@ -68,7 +68,7 @@ func restartAs(d *drive, img string) error {
 func updateCore(d *drive, img string) error {
 	// This is used in self-update in background, so this must be using
 	// volumes already.
-	self, err := dock.InspectCont(d.dock, d.core())
+	self, err := docker.InspectCont(d.dock, d.core())
 	if err != nil {
 		return errcode.Annotate(err, "inspect self")
 	}

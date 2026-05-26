@@ -10,7 +10,7 @@ import (
 	"shanhu.io/g/httputil"
 	"shanhu.io/g/jsonx"
 	"shanhu.io/g/strutil"
-	"shanhu.io/g/tarutil"
+	"shanhu.io/std/tarutil"
 )
 
 func addJSONXToTarStream(

@@ -3,7 +3,7 @@ package jarvis
 import (
 	"testing"
 
-	"shanhu.io/g/dock"
+	"shanhu.io/std/docker"
 )
 
 func TestCheckDockerVersion(t *testing.T) {
@@ -16,7 +16,7 @@ func TestCheckDockerVersion(t *testing.T) {
 		"21.0.0",
 		"100.0.0",
 	} {
-		info := &dock.VersionInfo{Version: v}
+		info := &docker.VersionInfo{Version: v}
 		if err := checkDockerVersion(info); err != nil {
 			t.Errorf("%q should not error, got %v", v, err)
 		}
@@ -32,7 +32,7 @@ func TestCheckDockerVersion(t *testing.T) {
 		"20.10.9-debug",
 		"20.10.9",
 	} {
-		info := &dock.VersionInfo{Version: v}
+		info := &docker.VersionInfo{Version: v}
 		if err := checkDockerVersion(info); err == nil {
 			t.Errorf("%q should error, got nil", v)
 		}

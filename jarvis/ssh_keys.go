@@ -6,8 +6,8 @@ import (
 	"shanhu.io/drv/burmilla"
 	"shanhu.io/g/aries"
 	"shanhu.io/g/bosinit"
-	"shanhu.io/g/tarutil"
 	"shanhu.io/std/errcode"
+	"shanhu.io/std/tarutil"
 )
 
 type sshKeys struct {

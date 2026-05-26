@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"shanhu.io/drv/drvapi"
-	"shanhu.io/g/dock"
+	"shanhu.io/std/docker"
 	"shanhu.io/std/errcode"
 )
 
@@ -63,11 +63,11 @@ func looksLikeHomeDriveImage(repoTag string) bool {
 func updateCleanUp(d *drive, r *drvapi.Release) error {
 	keep := releaseImagesToKeep(r)
 
-	images, err := dock.ListImages(d.dock)
+	images, err := docker.ListImages(d.dock)
 	if err != nil {
 		return errcode.Annotate(err, "list images")
 	}
-	removeOpts := &dock.RemoveImageOptions{NoPrune: true}
+	removeOpts := &docker.RemoveImageOptions{NoPrune: true}
 	for _, img := range images {
 		if _, found := keep[img.ID]; found {
 			continue
@@ -80,7 +80,7 @@ func updateCleanUp(d *drive, r *drvapi.Release) error {
 				continue
 			}
 			if looksLikeHomeDriveImage(t) {
-				if err := dock.RemoveImage(
+				if err := docker.RemoveImage(
 					d.dock, t, removeOpts,
 				); err != nil {
 					log.Printf("WARNING: untag %q: %s", t, err)
@@ -89,8 +89,8 @@ func updateCleanUp(d *drive, r *drvapi.Release) error {
 		}
 	}
 
-	opt := &dock.PruneImagesOption{}
-	if err := dock.PruneImages(d.dock, opt); err != nil {
+	opt := &docker.PruneImagesOption{}
+	if err := docker.PruneImages(d.dock, opt); err != nil {
 		return errcode.Annotate(err, "prune untagged docker images")
 	}
 	return nil

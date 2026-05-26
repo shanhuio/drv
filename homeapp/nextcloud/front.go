@@ -5,7 +5,7 @@ import (
 	drvcfg "shanhu.io/drv/drvconfig"
 	"shanhu.io/drv/homeapp"
 	"shanhu.io/drv/homeapp/apputil"
-	"shanhu.io/g/dock"
+	"shanhu.io/std/docker"
 	"shanhu.io/std/errcode"
 )
 
@@ -17,25 +17,25 @@ type Front struct {
 // NewFront creates a new ncfront app.
 func NewFront(c homeapp.Core) *Front { return &Front{core: c} }
 
-func (f *Front) cont() *dock.Cont {
-	return dock.NewCont(f.core.Docker(), homeapp.Cont(f.core, NameFront))
+func (f *Front) cont() *docker.Cont {
+	return docker.NewCont(f.core.Docker(), homeapp.Cont(f.core, NameFront))
 }
 
-func (f *Front) createCont(image string) (*dock.Cont, error) {
+func (f *Front) createCont(image string) (*docker.Cont, error) {
 	if image == "" {
 		return nil, errcode.InvalidArgf("no image specified")
 	}
 
 	nextcloudAddr := homeapp.Cont(f.core, Name) + ":80"
-	config := &dock.ContConfig{
+	config := &docker.ContConfig{
 		Name:          homeapp.Cont(f.core, NameFront),
 		Network:       homeapp.Network(f.core),
 		Env:           map[string]string{"NEXTCLOUD": nextcloudAddr},
 		AutoRestart:   true,
-		JSONLogConfig: dock.LimitedJSONLog(),
+		JSONLogConfig: docker.LimitedJSONLog(),
 		Labels:        drvcfg.NewNameLabel(NameFront),
 	}
-	return dock.CreateCont(f.core.Docker(), image, config)
+	return docker.CreateCont(f.core.Docker(), image, config)
 }
 
 func (f *Front) startWithImage(image string) error {

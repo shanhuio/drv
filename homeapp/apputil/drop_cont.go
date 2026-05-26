@@ -4,7 +4,7 @@ import (
 	"errors"
 	"log"
 
-	"shanhu.io/g/dock"
+	"shanhu.io/std/docker"
 	"shanhu.io/std/errcode"
 )
 
@@ -13,8 +13,8 @@ var ErrSameImage = errors.New("same image")
 
 // DropIfDifferent drops the container with name if the image is
 // different. It returns ErrSameImage if the image is the same.
-func DropIfDifferent(d *dock.Client, name, img string) error {
-	c := dock.NewCont(d, name)
+func DropIfDifferent(d *docker.Client, name, img string) error {
+	c := docker.NewCont(d, name)
 	info, err := c.Inspect()
 	if err != nil {
 		if errcode.IsNotFound(err) {
@@ -34,7 +34,7 @@ func DropIfDifferent(d *dock.Client, name, img string) error {
 
 // DropIfExists drops the container if the container exists.  Otherwise, it
 // prints a log line and do nothing.
-func DropIfExists(cont *dock.Cont) error {
+func DropIfExists(cont *docker.Cont) error {
 	exists, err := cont.Exists()
 	if err != nil {
 		return errcode.Annotatef(err, "check container exists")

@@ -5,8 +5,8 @@ import (
 
 	"shanhu.io/drv/drvapi"
 	"shanhu.io/drv/homeapp"
-	"shanhu.io/g/dock"
 	"shanhu.io/g/settings"
+	"shanhu.io/std/docker"
 	"shanhu.io/std/errcode"
 )
 
@@ -46,7 +46,7 @@ func (t *taskRecreateDoorway) run() error {
 	log.Println("re-creating doorway.")
 
 	d := t.drive
-	c := dock.NewCont(d.dock, d.cont(nameDoorway))
+	c := docker.NewCont(d.dock, d.cont(nameDoorway))
 	info, err := c.Inspect()
 	if err != nil {
 		return errcode.Annotate(err, "inspect current doorway")

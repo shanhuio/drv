@@ -8,8 +8,8 @@ import (
 
 	"shanhu.io/drv/drvapi"
 	"shanhu.io/drv/semver"
-	"shanhu.io/g/dock"
 	"shanhu.io/g/jsonutil"
+	"shanhu.io/std/docker"
 	"shanhu.io/std/errcode"
 )
 
@@ -104,7 +104,7 @@ func (b *builder) buildRelease(name string) error {
 				return errcode.InvalidArgf("origin missing for %q", img)
 			}
 
-			_, tag := dock.ParseImageTag(sum.Origin)
+			_, tag := docker.ParseImageTag(sum.Origin)
 			major, err := semver.Major(tag)
 			if err != nil {
 				return errcode.Annotatef(

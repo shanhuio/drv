@@ -6,8 +6,8 @@ import (
 	"strings"
 
 	"shanhu.io/g/bosinit"
-	"shanhu.io/g/dock"
 	"shanhu.io/g/strutil"
+	"shanhu.io/std/docker"
 	"shanhu.io/std/errcode"
 )
 
@@ -30,7 +30,7 @@ func ConfigMergeBad(b *Burmilla, config *bosinit.Config) error {
 	in := bytes.NewReader(bs)
 
 	c := b.Console()
-	if err := execError(c.ExecWithSetup(&dock.ExecSetup{
+	if err := execError(c.ExecWithSetup(&docker.ExecSetup{
 		Cmd:   strings.Fields("ros config merge"),
 		Stdin: in,
 	})); err != nil {

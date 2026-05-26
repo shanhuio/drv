@@ -2,8 +2,8 @@ package homeapp
 
 import (
 	drvcfg "shanhu.io/drv/drvconfig"
-	"shanhu.io/g/dock"
 	"shanhu.io/g/settings"
+	"shanhu.io/std/docker"
 )
 
 // Core provides the core interface to run an application.
@@ -12,7 +12,7 @@ type Core interface {
 	App(name string) (App, error)
 
 	// Docker gets the client to the application docker.
-	Docker() *dock.Client
+	Docker() *docker.Client
 
 	// Settings gets the settings table.
 	Settings() settings.Settings

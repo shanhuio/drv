@@ -9,8 +9,8 @@ import (
 	drvcfg "shanhu.io/drv/drvconfig"
 	"shanhu.io/drv/homeapp"
 	"shanhu.io/drv/homeapp/apputil"
-	"shanhu.io/g/dock"
 	"shanhu.io/g/sqlx"
+	"shanhu.io/std/docker"
 	"shanhu.io/std/errcode"
 )
 
@@ -30,12 +30,12 @@ func New(c homeapp.Core) *Postgres {
 	return &Postgres{core: c}
 }
 
-func (p *Postgres) cont() *dock.Cont {
+func (p *Postgres) cont() *docker.Cont {
 	d := p.core.Docker()
-	return dock.NewCont(d, homeapp.Cont(p.core, Name))
+	return docker.NewCont(d, homeapp.Cont(p.core, Name))
 }
 
-func (p *Postgres) createCont(image, pwd string) (*dock.Cont, error) {
+func (p *Postgres) createCont(image, pwd string) (*docker.Cont, error) {
 	if image == "" {
 		return nil, errcode.InvalidArgf("no image specified")
 	}
@@ -46,28 +46,28 @@ func (p *Postgres) createCont(image, pwd string) (*dock.Cont, error) {
 	d := p.core.Docker()
 	labels := drvcfg.NewNameLabel(Name)
 	volName := homeapp.Vol(p.core, Name)
-	if _, err := dock.CreateVolumeIfNotExist(
-		d, volName, &dock.VolumeConfig{Labels: labels},
+	if _, err := docker.CreateVolumeIfNotExist(
+		d, volName, &docker.VolumeConfig{Labels: labels},
 	); err != nil {
 		return nil, errcode.Annotate(err, "create postgres volume")
 	}
 
 	name := homeapp.Cont(p.core, Name)
 
-	config := &dock.ContConfig{
+	config := &docker.ContConfig{
 		Name:    name,
 		Network: homeapp.Network(p.core),
 		Env:     map[string]string{"POSTGRES_PASSWORD": pwd},
-		Mounts: []*dock.ContMount{{
-			Type: dock.MountVolume,
+		Mounts: []*docker.ContMount{{
+			Type: docker.MountVolume,
 			Host: volName,
 			Cont: "/var/lib/postgresql/data",
 		}},
 		AutoRestart:   true,
-		JSONLogConfig: dock.LimitedJSONLog(),
+		JSONLogConfig: docker.LimitedJSONLog(),
 		Labels:        labels,
 	}
-	return dock.CreateCont(d, image, config)
+	return docker.CreateCont(d, image, config)
 }
 
 func (p *Postgres) open(user, pwd, db string) (*sqlx.DB, error) {
@@ -134,7 +134,7 @@ func (p *Postgres) Change(from, to *drvapi.AppMeta) error {
 	}
 	if to == nil {
 		vol := homeapp.Vol(p.core, Name)
-		if err := dock.RemoveVolume(p.core.Docker(), vol); err != nil {
+		if err := docker.RemoveVolume(p.core.Docker(), vol); err != nil {
 			return errcode.Annotate(err, "remove volume")
 		}
 		return nil

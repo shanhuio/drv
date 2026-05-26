@@ -9,8 +9,8 @@ import (
 	"text/template"
 
 	drvcfg "shanhu.io/drv/drvconfig"
-	"shanhu.io/g/dock"
 	"shanhu.io/g/osutil"
+	"shanhu.io/std/docker"
 	"shanhu.io/std/errcode"
 )
 
@@ -138,7 +138,7 @@ func updateBootPart(dev, osVersion string) error {
 }
 
 func runUpdateBootPart(d *drive, osVersion string) error {
-	self, err := dock.InspectCont(d.dock, d.core())
+	self, err := docker.InspectCont(d.dock, d.core())
 	if err != nil {
 		return errcode.Annotate(err, "inspect self")
 	}
@@ -148,9 +148,9 @@ func runUpdateBootPart(d *drive, osVersion string) error {
 	// update grub config files. Send in the dev and osVersion as args.
 	const dev = "/dev/sda1" // boot partition device on nuc7
 
-	dockConfig := &dock.ContConfig{
+	dockConfig := &docker.ContConfig{
 		Privileged: true,
-		Devices:    []*dock.ContDevice{{Host: dev}},
+		Devices:    []*docker.ContDevice{{Host: dev}},
 		Labels:     drvcfg.NewNameLabel("temp"),
 		Cmd: []string{
 			"jarvis", "update-grub-config",
@@ -159,7 +159,7 @@ func runUpdateBootPart(d *drive, osVersion string) error {
 		},
 	}
 
-	cont, err := dock.CreateCont(d.dock, img, dockConfig)
+	cont, err := docker.CreateCont(d.dock, img, dockConfig)
 	if err != nil {
 		return err
 	}
@@ -169,7 +169,7 @@ func runUpdateBootPart(d *drive, osVersion string) error {
 		return errcode.Annotate(err, "start boot partition update")
 	}
 
-	ret, err := cont.Wait(dock.NotRunning)
+	ret, err := cont.Wait(docker.NotRunning)
 	if err != nil {
 		return errcode.Annotate(err, "waiting for update to finish")
 	}

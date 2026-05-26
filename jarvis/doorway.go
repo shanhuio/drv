@@ -7,10 +7,10 @@ import (
 	doorwaypkg "shanhu.io/drv/doorway"
 	"shanhu.io/drv/drvapi"
 	drvcfg "shanhu.io/drv/drvconfig"
-	"shanhu.io/g/dock"
 	"shanhu.io/g/rsautil"
-	"shanhu.io/g/tarutil"
+	"shanhu.io/std/docker"
 	"shanhu.io/std/errcode"
+	"shanhu.io/std/tarutil"
 )
 
 const (
@@ -157,7 +157,7 @@ func (d *doorway) install(image string) error {
 }
 
 func (d *doorway) update(image string) error {
-	c := dock.NewCont(d.dock, d.cont(nameDoorway))
+	c := docker.NewCont(d.dock, d.cont(nameDoorway))
 	if _, err := c.Inspect(); err != nil {
 		if errcode.IsNotFound(err) {
 			log.Printf("doorway not found. try to reinstall.")
@@ -190,13 +190,13 @@ func (d *doorway) start(
 	labels := drvcfg.NewNameLabel(nameDoorway)
 
 	volName := d.vol(nameDoorway)
-	if _, err := dock.CreateVolumeIfNotExist(
-		d.dock, volName, &dock.VolumeConfig{Labels: labels},
+	if _, err := docker.CreateVolumeIfNotExist(
+		d.dock, volName, &docker.VolumeConfig{Labels: labels},
 	); err != nil {
 		return errcode.Annotate(err, "create doorway volume")
 	}
 
-	var portBinds []*dock.PortBind
+	var portBinds []*docker.PortBind
 	// TODO(h8liu): read from settings rather than drive config.
 	// makes the port binding configurable.
 	drvConfig := d.drive.config
@@ -205,7 +205,7 @@ func (d *doorway) start(
 			port = 80
 		}
 		if port > 0 {
-			portBinds = append(portBinds, &dock.PortBind{
+			portBinds = append(portBinds, &docker.PortBind{
 				HostPort: port, ContPort: 8080,
 			})
 		}
@@ -215,31 +215,31 @@ func (d *doorway) start(
 			port = 443
 		}
 		if port > 0 {
-			portBinds = append(portBinds, &dock.PortBind{
+			portBinds = append(portBinds, &docker.PortBind{
 				HostPort: port, ContPort: 8443,
 			})
 		}
 	}
 
-	config := &dock.ContConfig{
+	config := &docker.ContConfig{
 		Name:        d.cont(nameDoorway),
 		Network:     d.network(),
 		AutoRestart: true,
-		Mounts: []*dock.ContMount{{
-			Type: dock.MountVolume,
+		Mounts: []*docker.ContMount{{
+			Type: docker.MountVolume,
 			Host: volName,
 			Cont: doorwayVarDir,
 		}},
 		TCPBinds:      portBinds,
 		Labels:        labels,
-		JSONLogConfig: dock.LimitedJSONLog(),
+		JSONLogConfig: docker.LimitedJSONLog(),
 	}
-	cont, err := dock.CreateCont(d.dock, image, config)
+	cont, err := docker.CreateCont(d.dock, image, config)
 	if err != nil {
 		return errcode.Annotate(err, "create doorway container")
 	}
 
-	if err := dock.CopyInTarStream(
+	if err := docker.CopyInTarStream(
 		cont, etcFiles, doorwayEtcDir,
 	); err != nil {
 		cont.Drop()
@@ -247,7 +247,7 @@ func (d *doorway) start(
 	}
 
 	if varFiles != nil {
-		if err := dock.CopyInTarStream(
+		if err := docker.CopyInTarStream(
 			cont, varFiles, doorwayVarDir,
 		); err != nil {
 			cont.Drop()

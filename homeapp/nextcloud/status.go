@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"shanhu.io/g/dock"
+	"shanhu.io/std/docker"
 	"shanhu.io/std/errcode"
 )
 
@@ -39,7 +39,7 @@ func parseNextcloudStatus(out string) (*status, error) {
 	return status, nil
 }
 
-func readStatus(c *dock.Cont) (*status, int, error) {
+func readStatus(c *docker.Cont) (*status, int, error) {
 	out := new(bytes.Buffer)
 	ret, err := occRet(c, []string{"status", "--output=json"}, out)
 	if err != nil {
@@ -54,7 +54,7 @@ func readStatus(c *dock.Cont) (*status, int, error) {
 
 var errNotInstalled = errcode.Internalf("status not ready")
 
-func checkInstalled(c *dock.Cont, v string) error {
+func checkInstalled(c *docker.Cont, v string) error {
 	// Double check with occ status. Should be safe now.
 	status, ret, err := readStatus(c)
 	if err != nil {
@@ -78,7 +78,7 @@ func checkInstalled(c *dock.Cont, v string) error {
 }
 
 func waitReady(
-	cont *dock.Cont, timeout time.Duration, v string,
+	cont *docker.Cont, timeout time.Duration, v string,
 ) error {
 	start := time.Now()
 	deadline := start.Add(timeout)
@@ -149,7 +149,7 @@ func waitReady(
 	return nil
 }
 
-func readTrueVersion(cont *dock.Cont) (string, error) {
+func readTrueVersion(cont *docker.Cont) (string, error) {
 	status, ret, err := readStatus(cont)
 	if err != nil {
 		return "", errcode.Annotate(err, "read status")
@@ -160,7 +160,7 @@ func readTrueVersion(cont *dock.Cont) (string, error) {
 	return status.VersionString, nil
 }
 
-func readVersion(cont *dock.Cont, def string) (string, error) {
+func readVersion(cont *docker.Cont, def string) (string, error) {
 	exists, err := cont.Exists()
 	if err != nil {
 		return "", errcode.Annotatef(err, "check container exist")

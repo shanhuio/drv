@@ -2,10 +2,10 @@ package homeboot
 
 import (
 	drvcfg "shanhu.io/drv/drvconfig"
-	"shanhu.io/g/dock"
 	"shanhu.io/g/osutil"
-	"shanhu.io/g/tarutil"
+	"shanhu.io/std/docker"
 	"shanhu.io/std/errcode"
+	"shanhu.io/std/tarutil"
 )
 
 // CoreMount is the mount point of jarvis volume.
@@ -21,7 +21,7 @@ type CoreConfig struct {
 }
 
 // StartCore starts the core.homedrv container.
-func StartCore(client *dock.Client, config *CoreConfig) (string, error) {
+func StartCore(client *docker.Client, config *CoreConfig) (string, error) {
 	naming := config.Drive.Naming
 	image := config.Image
 	if image == "" {
@@ -30,13 +30,13 @@ func StartCore(client *dock.Client, config *CoreConfig) (string, error) {
 	name := drvcfg.Core(naming)
 	labels := drvcfg.NewNameLabel("core")
 
-	binds := []*dock.ContMount{{
-		Type: dock.MountVolume,
+	binds := []*docker.ContMount{{
+		Type: docker.MountVolume,
 		Host: name,
 		Cont: CoreMount,
 	}}
 
-	bindSocks := []string{dock.Socket}
+	bindSocks := []string{docker.Socket}
 	if config.BindSysDock {
 		bindSocks = append(bindSocks, systemDockSock)
 	}
@@ -48,10 +48,10 @@ func StartCore(client *dock.Client, config *CoreConfig) (string, error) {
 		if !ok {
 			return "", errcode.Annotatef(err, "socket %q", s)
 		}
-		binds = append(binds, &dock.ContMount{Host: s, Cont: s})
+		binds = append(binds, &docker.ContMount{Host: s, Cont: s})
 	}
 
-	dockConfig := &dock.ContConfig{
+	dockConfig := &docker.ContConfig{
 		Name:        name,
 		Network:     drvcfg.Network(naming),
 		AutoRestart: true,
@@ -62,19 +62,19 @@ func StartCore(client *dock.Client, config *CoreConfig) (string, error) {
 	// because updating the core needs to run a new one along
 	// side with the old one.
 
-	if _, err := dock.CreateVolumeIfNotExist(
-		client, name, &dock.VolumeConfig{Labels: labels},
+	if _, err := docker.CreateVolumeIfNotExist(
+		client, name, &docker.VolumeConfig{Labels: labels},
 	); err != nil {
 		return "", errcode.Annotate(err, "create volume for core")
 	}
 
-	cont, err := dock.CreateCont(client, image, dockConfig)
+	cont, err := docker.CreateCont(client, image, dockConfig)
 	if err != nil {
 		return "", errcode.Annotate(err, "create core container")
 	}
 
 	if config.Files != nil {
-		if err := dock.CopyInTarStream(
+		if err := docker.CopyInTarStream(
 			cont, config.Files, CoreMount,
 		); err != nil {
 			cont.Drop()

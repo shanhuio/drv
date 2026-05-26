@@ -8,28 +8,28 @@ import (
 
 	"shanhu.io/drv/drvapi"
 	drvcfg "shanhu.io/drv/drvconfig"
-	"shanhu.io/g/dock"
 	"shanhu.io/g/httputil"
+	"shanhu.io/std/docker"
 	"shanhu.io/std/errcode"
 )
 
 // Downloader is a downloader for downloading docker images.
 type Downloader struct {
 	src  *DownloadSource
-	dock *dock.Client
+	dock *docker.Client
 }
 
 // NewOfficialDownloader creates a new downloader that downloads
 // from the official source.
 func NewOfficialDownloader(
-	c *httputil.Client, dock *dock.Client,
+	c *httputil.Client, dock *docker.Client,
 ) *Downloader {
 	src := OfficialDownloadSource(c)
 	return NewDownloader(src, dock)
 }
 
 // NewDownloader creates a new downloader.
-func NewDownloader(src *DownloadSource, dock *dock.Client) *Downloader {
+func NewDownloader(src *DownloadSource, dock *docker.Client) *Downloader {
 	return &Downloader{src: src, dock: dock}
 }
 
@@ -38,7 +38,7 @@ func (d *Downloader) loadImage(r io.ReadCloser, err error) error {
 		return err
 	}
 	defer r.Close()
-	return dock.LoadImages(d.dock, r)
+	return docker.LoadImages(d.dock, r)
 }
 
 // FetchBuild fetches a particular build.
@@ -96,7 +96,7 @@ func (d *Downloader) downloadImages(
 			display = fmt.Sprintf("%s:%s", img.name, img.tag)
 		}
 
-		found, err := dock.HasImage(d.dock, img.hash)
+		found, err := docker.HasImage(d.dock, img.hash)
 		if err != nil {
 			return errcode.Annotatef(err, "check image %q", img.name)
 		}
@@ -112,7 +112,7 @@ func (d *Downloader) downloadImages(
 			tag = "main"
 		}
 		log.Printf("tag image as %s:%s", repo, tag)
-		if err := dock.TagImage(d.dock, img.hash, repo, tag); err != nil {
+		if err := docker.TagImage(d.dock, img.hash, repo, tag); err != nil {
 			return errcode.Annotatef(err, "tag image %q", display)
 		}
 	}

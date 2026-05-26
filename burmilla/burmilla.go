@@ -5,23 +5,23 @@ import (
 	"io/ioutil"
 	"strings"
 
-	"shanhu.io/g/dock"
-	"shanhu.io/g/tarutil"
+	"shanhu.io/std/docker"
+	"shanhu.io/std/tarutil"
 )
 
 // Burmilla provides the
 type Burmilla struct {
-	sysDock *dock.Client
+	sysDock *docker.Client
 }
 
 // New creates a new burmilla stub.
-func New(d *dock.Client) *Burmilla {
+func New(d *docker.Client) *Burmilla {
 	return &Burmilla{sysDock: d}
 }
 
 // Console returns the console container.
-func (b *Burmilla) Console() *dock.Cont {
-	return dock.NewCont(b.sysDock, "console")
+func (b *Burmilla) Console() *docker.Cont {
+	return docker.NewCont(b.sysDock, "console")
 }
 
 // ExecOutput executes a command on the OS's console
@@ -29,7 +29,7 @@ func (b *Burmilla) Console() *dock.Cont {
 func (b *Burmilla) ExecOutput(args []string) ([]byte, error) {
 	out := new(bytes.Buffer)
 	c := b.Console()
-	if err := execError(c.ExecWithSetup(&dock.ExecSetup{
+	if err := execError(c.ExecWithSetup(&docker.ExecSetup{
 		Cmd:    args,
 		Stdout: out,
 	})); err != nil {
@@ -42,7 +42,7 @@ func (b *Burmilla) ExecOutput(args []string) ([]byte, error) {
 // value.
 func (b *Burmilla) ExecRet(args []string) (int, error) {
 	c := b.Console()
-	return c.ExecWithSetup(&dock.ExecSetup{
+	return c.ExecWithSetup(&docker.ExecSetup{
 		Cmd:    args,
 		Stdout: ioutil.Discard,
 	})
@@ -51,7 +51,7 @@ func (b *Burmilla) ExecRet(args []string) (int, error) {
 // CopyInTarStream copies files into the console's filesystem.
 func (b *Burmilla) CopyInTarStream(s *tarutil.Stream, target string) error {
 	c := b.Console()
-	return dock.CopyInTarStream(c, s, target)
+	return docker.CopyInTarStream(c, s, target)
 }
 
 // ListOS lists the avaiable OS versions.
