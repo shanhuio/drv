@@ -36,7 +36,6 @@ file_set {
     Name: "all_files",
     Select: ["**"],
     Ignore: [
-        "_/",
         "jarvis/web/",
         "dockers/",
         "*.caco3",
