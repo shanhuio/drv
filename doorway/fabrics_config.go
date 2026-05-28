@@ -8,8 +8,8 @@ import (
 	"github.com/gorilla/websocket"
 	fabdial "shanhu.io/drv/fabricsdial"
 	"shanhu.io/drv/homedial"
+	"shanhu.io/drv/sniproxy"
 	"shanhu.io/g/https/httpstest"
-	"shanhu.io/g/sniproxy"
 	"shanhu.io/std/errcode"
 )
 

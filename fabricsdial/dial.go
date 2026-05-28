@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/websocket"
-	"shanhu.io/g/sniproxy"
+	"shanhu.io/drv/sniproxy"
 )
 
 // NewWebSocketDialer creates a new WebSocket dialer from

@@ -3,7 +3,7 @@ package doorway
 import (
 	"net"
 
-	"shanhu.io/g/sniproxy"
+	"shanhu.io/drv/sniproxy"
 )
 
 type fabricsAddr struct {

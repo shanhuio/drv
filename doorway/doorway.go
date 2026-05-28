@@ -8,9 +8,9 @@ import (
 	"net/http"
 
 	fabdial "shanhu.io/drv/fabricsdial"
+	"shanhu.io/drv/sniproxy"
 	"shanhu.io/g/aries"
 	"shanhu.io/g/netutil"
-	"shanhu.io/g/sniproxy"
 	"shanhu.io/std/errcode"
 )
 
