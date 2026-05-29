@@ -10,9 +10,9 @@ import (
 	"time"
 
 	"golang.org/x/crypto/acme/autocert"
-	"shanhu.io/g/jsonx"
 	"shanhu.io/g/osutil"
 	"shanhu.io/std/errcode"
+	"shanhu.io/std/jsonx"
 )
 
 func readHostMap(p string) (map[string]string, error) {

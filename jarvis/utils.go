@@ -9,7 +9,7 @@ import (
 
 	"shanhu.io/drv/strutil"
 	"shanhu.io/g/httputil"
-	"shanhu.io/g/jsonx"
+	"shanhu.io/std/jsonx"
 	"shanhu.io/std/tarutil"
 )
 

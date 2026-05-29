@@ -12,10 +12,10 @@ import (
 	"shanhu.io/g/creds"
 	"shanhu.io/g/flagutil"
 	"shanhu.io/g/httputil"
-	"shanhu.io/g/jsonx"
 	"shanhu.io/g/rsautil"
 	"shanhu.io/std/docker"
 	"shanhu.io/std/errcode"
+	"shanhu.io/std/jsonx"
 	"shanhu.io/std/tarutil"
 )
 

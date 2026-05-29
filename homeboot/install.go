@@ -1,8 +1,8 @@
 package homeboot
 
 import (
-	"shanhu.io/g/jsonx"
 	"shanhu.io/std/errcode"
+	"shanhu.io/std/jsonx"
 )
 
 func cmdInstall(args []string) error {

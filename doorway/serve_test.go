@@ -14,7 +14,7 @@ import (
 	"sync"
 
 	"shanhu.io/g/https/httpstest"
-	"shanhu.io/g/jsonx"
+	"shanhu.io/std/jsonx"
 )
 
 func checkGet(t *testing.T, c *http.Client, url, want string) {
