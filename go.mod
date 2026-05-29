@@ -7,14 +7,14 @@ require (
 	github.com/lib/pq v1.12.3
 	github.com/pquerna/otp v1.5.0
 	golang.org/x/crypto v0.52.0
-	modernc.org/sqlite v1.50.1
-	shanhu.io/g v0.0.0-20260526131332-d9d364904fc0
-	shanhu.io/std v0.0.0-20260526124544-ba0f0bc80867
+	modernc.org/sqlite v1.51.0
+	shanhu.io/g v0.0.0-20260529055848-9fe448140892
+	shanhu.io/std v0.0.0-20260526134402-b8de61774e54
 )
 
 require (
 	github.com/boombuler/barcode v1.1.0 // indirect
-	github.com/digitalocean/godo v1.192.0 // indirect
+	github.com/digitalocean/godo v1.193.0 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/google/go-querystring v1.2.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
