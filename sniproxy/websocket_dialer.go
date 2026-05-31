@@ -7,8 +7,8 @@ import (
 	"net/url"
 
 	"github.com/gorilla/websocket"
-	"shanhu.io/g/errcode"
 	"shanhu.io/g/httputil"
+	"shanhu.io/std/errcode"
 )
 
 type websocketDialer struct {

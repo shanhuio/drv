@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sync"
 
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 type connections struct {

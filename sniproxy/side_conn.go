@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 type sideConnAddr struct {

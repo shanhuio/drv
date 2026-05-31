@@ -4,7 +4,7 @@ import (
 	"context"
 	"net"
 
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 type dialer interface {

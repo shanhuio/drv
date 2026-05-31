@@ -5,7 +5,7 @@ import (
 
 	"encoding/json"
 
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 // Options is a the JSON marshalable options for dialing an endpoint.

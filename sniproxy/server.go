@@ -8,7 +8,7 @@ import (
 
 	"github.com/gorilla/websocket"
 	"shanhu.io/g/aries"
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 // Dest specifies a destination.

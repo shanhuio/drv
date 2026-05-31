@@ -5,7 +5,7 @@ import (
 	"net"
 	"sync"
 
-	"shanhu.io/g/errcode"
+	"shanhu.io/std/errcode"
 )
 
 type connMailBox struct {
