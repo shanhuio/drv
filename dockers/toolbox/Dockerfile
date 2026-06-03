@@ -1,6 +1,6 @@
 #tag cr.homedrive.io/homedrv/toolbox
 
-FROM cr.shanhu.io/lib/app
+FROM cr.shanhu.io/bld/app
 LABEL io.homedrive.name=toolbox
 
 COPY shanhu.io/drv/daemon/toolboxd /opt/app/bin/toolboxd

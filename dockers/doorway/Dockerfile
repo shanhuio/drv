@@ -1,4 +1,4 @@
-FROM cr.shanhu.io/lib/app
+FROM cr.shanhu.io/bld/app
 LABEL io.homedrive.name=doorway
 
 COPY shanhu.io/drv/daemon/doorwayd /opt/app/bin/doorwayd

@@ -1,6 +1,6 @@
 #tag cr.homedrive.io/homedrv/ncfront
 
-FROM cr.shanhu.io/lib/app
+FROM cr.shanhu.io/bld/app
 LABEL io.homedrive.name=ncfront
 
 COPY shanhu.io/drv/daemon/ncfrontd /opt/app/bin/ncfrontd

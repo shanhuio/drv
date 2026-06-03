@@ -1,6 +1,6 @@
 #inzip //npm/jarvis/jarvis.zip
 
-FROM cr.shanhu.io/lib/base
+FROM cr.shanhu.io/bld/base
 LABEL io.homedrive.name=jarvis
 
 RUN mkdir -p /opt/jarvis

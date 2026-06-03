@@ -1,13 +1,13 @@
 docker_build {
     Name: "homeboot",
-    From: ["/shanhu.io/lib/dockers/app"],
+    From: ["/shanhu.io/bld/dockers/app"],
     Input: ["/shanhu.io/drv/cmd/homeboot"],
     OutputTar: true,
 }
 
 docker_build {
     Name: "core",
-    From: ["/shanhu.io/lib/dockers/base"],
+    From: ["/shanhu.io/bld/dockers/base"],
     Input: [
         "/shanhu.io/drv/daemon/jarvisd",
     ],
@@ -19,21 +19,21 @@ docker_build {
 
 docker_build {
     Name: "ncfront",
-    From: ["/shanhu.io/lib/dockers/app"],
+    From: ["/shanhu.io/bld/dockers/app"],
     Input: ["/shanhu.io/drv/daemon/ncfrontd"],
     OutputTar: true,
 }
 
 docker_build {
     Name: "doorway",
-    From: ["/shanhu.io/lib/dockers/app"],
+    From: ["/shanhu.io/bld/dockers/app"],
     Input: ["/shanhu.io/drv/daemon/doorwayd"],
     OutputTar: true,
 }
 
 docker_build {
     Name: "toolbox",
-    From: ["/shanhu.io/lib/dockers/base"],
+    From: ["/shanhu.io/bld/dockers/base"],
     Input: ["/shanhu.io/drv/daemon/toolboxd"],
     OutputTar: true,
 }

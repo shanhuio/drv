@@ -1,5 +1,5 @@
 {
-    RepoCommits: {
-        "shanhu.io/lib/dockers": "9bd487280075c1f8298b0355a18e273fab8a9b12",
-    },
+  RepoCommits: {
+    "shanhu.io/bld": "573147e9a2c097c10c4bc09820d6774d105ed833",
+  },
 }

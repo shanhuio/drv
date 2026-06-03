@@ -1,7 +1,7 @@
 docker_run {
     Name: "bins",
-    Image: "/shanhu.io/lib/dockers/forge",
-    MountWorkspace: "/work",
+    Image: "/shanhu.io/bld/dockers/forge",
+    MountDir: "/work",
     WorkDir: "/work",
     Envs: [
         "GOPRIVATE=shanhu.io",

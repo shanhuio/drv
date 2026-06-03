@@ -7,6 +7,6 @@ repo_map {
         "shanhu.io": "git.shanhu.io",
     },
     Src: {
-        "shanhu.io/lib/dockers": "",
+        "shanhu.io/bld": "https://github.com/shanhuio/bld.git",
     },
 }

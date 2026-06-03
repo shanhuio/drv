@@ -1,6 +1,6 @@
 #tag homedrv/homeboot-images
 
-FROM cr.shanhu.io/lib/app
+FROM cr.shanhu.io/bld/app
 LABEL io.homedrive.name=homeboot
 
 COPY shanhu.io/drv/cmd/homeboot /opt/app/bin/homeboot
