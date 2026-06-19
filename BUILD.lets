@@ -1,3 +1,10 @@
+repo {
+    Name: "shanhu.io/drv",
+    Deps: {
+        "shanhu.io/bld": "https://github.com/shanhuio/bld.git",
+    },
+}
+
 docker_run {
     Name: "bins",
     Image: "/shanhu.io/bld/dockers/forge",
