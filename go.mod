@@ -8,13 +8,13 @@ require (
 	github.com/pquerna/otp v1.5.0
 	golang.org/x/crypto v0.53.0
 	modernc.org/sqlite v1.52.0
-	shanhu.io/g v0.0.0-20260607101119-4e47b6d39f1b
+	shanhu.io/g v0.0.0-20260620194002-7d14c89a0904
 	shanhu.io/std v0.0.0-20260612232620-c5a277ad5225
 )
 
 require (
 	github.com/boombuler/barcode v1.1.0 // indirect
-	github.com/digitalocean/godo v1.195.0 // indirect
+	github.com/digitalocean/godo v1.196.0 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/google/go-querystring v1.2.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
@@ -32,7 +32,7 @@ require (
 	golang.org/x/text v0.38.0 // indirect
 	golang.org/x/time v0.15.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	modernc.org/libc v1.73.1 // indirect
+	modernc.org/libc v1.73.4 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.11.0 // indirect
 )
