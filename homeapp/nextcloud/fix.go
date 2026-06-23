@@ -2,6 +2,7 @@ package nextcloud
 
 import (
 	"io"
+	"strings"
 
 	"shanhu.io/drv/semver"
 	"shanhu.io/g/settings"
@@ -56,6 +57,14 @@ func fixVersion(cont *docker.Cont, s settings.Settings, major int) error {
 		}
 	}
 
+	if major >= 30 {
+		// Also perform heavy migrations.
+		cmd := []string{"maintenance:repair", "--include-expensive"}
+		if _, err := occOutput(cont, cmd); err != nil {
+			return errcode.Annotate(err, strings.Join(cmd, " "))
+		}
+	}
+
 	k := fixKey(major)
 	if k == "" {
 		return nil
@@ -76,18 +85,6 @@ func fixVersion(cont *docker.Cont, s settings.Settings, major int) error {
 			return errcode.Annotate(err, cmd)
 		}
 	}
-
-	/* Maybe include this next time?
-
-	if major >= 30 {
-		// Also perform heavy migrations.
-		cmd := []string{"maintenance:repair", "--include-expensive"}
-		if _, err := occOutput(cont, cmd); err != nil {
-			return errcode.Annotate(err, strings.Join(cmd, " "))
-		}
-	}
-
-	*/
 
 	if err := s.Set(k, true); err != nil {
 		return errcode.Annotatef(err, "set fixed flag v%d", major)
