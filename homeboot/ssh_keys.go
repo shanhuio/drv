@@ -10,14 +10,25 @@ import (
 	"shanhu.io/std/errcode"
 )
 
-func fetchGitHubKeys(user string) ([]string, error) {
-	c := &httputil.Client{
+func githubClient() *httputil.Client {
+	return &httputil.Client{
 		Server: &url.URL{
 			Scheme: "https",
 			Host:   "github.com",
 		},
 	}
+}
 
+func homedriveClient() *httputil.Client {
+	return &httputil.Client{
+		Server: &url.URL{
+			Scheme: "https",
+			Host:   "www.homedrive.io",
+		},
+	}
+}
+
+func fetchGitHubKeys(c *httputil.Client, user string) ([]string, error) {
 	keys, err := c.GetString(fmt.Sprintf("/%s.keys", user))
 	if err != nil {
 		return nil, err
@@ -33,13 +44,7 @@ func fetchGitHubKeys(user string) ([]string, error) {
 	return lines, nil
 }
 
-func fetchUserKeys(user string) ([]string, error) {
-	c := &httputil.Client{
-		Server: &url.URL{
-			Scheme: "https",
-			Host:   "www.homedrive.io",
-		},
-	}
+func fetchUserKeys(c *httputil.Client, user string) ([]string, error) {
 	resp := new(drvapi.UserSSHKeyLines)
 	if err := c.Call("/pubapi/user/sshkeys", user, resp); err != nil {
 		return nil, err
@@ -51,7 +56,7 @@ func fetchUserKeys(user string) ([]string, error) {
 func FetchSSHKeys(c *InitConfig) ([]string, error) {
 	var lines []string
 	if c.GitHubKeys != "" {
-		keys, err := fetchGitHubKeys(c.GitHubKeys)
+		keys, err := fetchGitHubKeys(githubClient(), c.GitHubKeys)
 		if err != nil {
 			return nil, errcode.Annotate(err, "fetch github keys")
 		}
@@ -59,7 +64,7 @@ func FetchSSHKeys(c *InitConfig) ([]string, error) {
 	}
 
 	if c.UserKeys != "" {
-		keys, err := fetchUserKeys(c.UserKeys)
+		keys, err := fetchUserKeys(homedriveClient(), c.UserKeys)
 		if err != nil {
 			return nil, errcode.Annotatef(
 				err, "fetch ssh keys of %q", c.UserKeys,
