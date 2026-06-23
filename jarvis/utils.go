@@ -31,7 +31,7 @@ func pingDomains(domains []string) {
 	client := http.DefaultClient
 
 	done := make(map[string]bool)
-	for i := 0; i < 3; i++ {
+	for range 3 {
 		if len(done) == len(list) {
 			break
 		}

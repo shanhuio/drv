@@ -151,8 +151,7 @@ func TestServer_proxy(t *testing.T) {
 	defer ts.Close()
 
 	wg.Add(1)
-	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
+	ctx := t.Context()
 	go func(ctx context.Context) {
 		defer wg.Done()
 		if err := s.ServeFront(ctx, lis); err != nil {
@@ -255,8 +254,7 @@ func TestServer_kick(t *testing.T) {
 	defer ts.Close()
 
 	wg.Add(1)
-	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
+	ctx := t.Context()
 	go func(ctx context.Context) {
 		defer wg.Done()
 		if err := s.ServeFront(ctx, lis); err != nil {

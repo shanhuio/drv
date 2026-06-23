@@ -116,7 +116,7 @@ func upgradeBurmillaOS(d *drive, v string) error {
 
 func waitOSInitDone(b *burmilla.Burmilla) error {
 	const n = 5
-	for i := 0; i < n; i++ {
+	for range n {
 		ret1, err1 := b.ExecRet([]string{
 			"test", "-f", "/opt/homedrv/.init-done",
 		})

@@ -2,6 +2,7 @@ package jarvis
 
 import (
 	"log"
+	"maps"
 	"sort"
 
 	doorwaypkg "shanhu.io/drv/doorway"
@@ -80,9 +81,7 @@ func (d *doorway) hostMap() (map[string]string, error) {
 	if err != nil {
 		return nil, errcode.Annotate(err, "check custom subs")
 	}
-	for sub, dest := range subs {
-		m[sub] = dest
-	}
+	maps.Copy(m, subs)
 
 	apps, err := d.appDomains.list()
 	if err != nil {

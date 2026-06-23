@@ -109,10 +109,7 @@ func (c *sideConn) Write(buf []byte) (int, error) {
 
 	n := 0
 	for n < len(buf) {
-		end := n + chunk
-		if end > len(buf) {
-			end = len(buf)
-		}
+		end := min(n+chunk, len(buf))
 		toSend := buf[n:end]
 
 		w, err := c.Conn.NextWriter(websocket.BinaryMessage)

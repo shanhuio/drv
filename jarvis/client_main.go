@@ -162,12 +162,12 @@ func cmdSetNextcloudExtraMount(args []string) error {
 
 	m := make(map[string]string)
 	for _, mnt := range args {
-		colon := strings.Index(mnt, ":")
-		if colon < 0 {
+		before, after, ok := strings.Cut(mnt, ":")
+		if !ok {
 			m[mnt] = mnt
 		} else {
-			host := mnt[:colon]
-			cont := mnt[colon+1:]
+			host := before
+			cont := after
 			m[host] = cont
 		}
 	}

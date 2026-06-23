@@ -39,10 +39,10 @@ func newMemHostMap(m map[string]string) *memHostMap {
 			entries[from] = &hostEntry{
 				typ: hostHome,
 			}
-		} else if strings.HasPrefix(to, "!") {
+		} else if after, ok := strings.CutPrefix(to, "!"); ok {
 			entries[from] = &hostEntry{
 				typ:  hostRedirect,
-				host: strings.TrimPrefix(to, "!"),
+				host: after,
 			}
 		} else {
 			entries[from] = &hostEntry{

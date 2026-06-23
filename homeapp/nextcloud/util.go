@@ -13,8 +13,8 @@ import (
 
 func configSaysInstalled(config []byte) bool {
 	// check if the config file has the `'installed' => true` line.
-	lines := strings.Split(string(config), "\n")
-	for _, line := range lines {
+	lines := strings.SplitSeq(string(config), "\n")
+	for line := range lines {
 		line = strings.TrimSpace(line)
 		if line == `'installed' => true,` {
 			return true
@@ -49,8 +49,8 @@ func enableSMB(c *docker.Cont, out io.Writer) error {
 	if err := exec(c, []string{"pecl", "list"}, peclList); err != nil {
 		return errcode.Annotate(err, "pecl list")
 	}
-	lines := strings.Split(peclList.String(), "\n")
-	for _, line := range lines {
+	lines := strings.SplitSeq(peclList.String(), "\n")
+	for line := range lines {
 		fields := strings.Fields(line)
 		if len(fields) == 3 && fields[0] == "smbclient" {
 			// smbclient already installed; let's skip.

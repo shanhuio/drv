@@ -45,7 +45,7 @@ func (k *sshKeys) apiUpdate(c *aries.C, req *updateSSHKeysRequest) (
 	}
 
 	var keys []string
-	for _, line := range strings.Split(req.Keys, "\n") {
+	for line := range strings.SplitSeq(req.Keys, "\n") {
 		if k := strings.TrimSpace(line); k != "" {
 			// TODO(jungong) : do we need to make sure all the non-empty
 			// keys here are parsable?

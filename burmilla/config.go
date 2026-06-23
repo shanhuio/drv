@@ -3,6 +3,7 @@ package burmilla
 import (
 	"bytes"
 	"fmt"
+	"slices"
 	"strings"
 
 	"shanhu.io/drv/bosinit"
@@ -111,10 +112,5 @@ func isOnDigitalOcean(config *bosinit.Config) bool {
 		return false
 	}
 
-	for _, src := range init.DataSources {
-		if src == "digitalocean" {
-			return true
-		}
-	}
-	return false
+	return slices.Contains(init.DataSources, "digitalocean")
 }

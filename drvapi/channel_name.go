@@ -44,9 +44,9 @@ func ParseChannelName(name string) *ChannelName {
 	}
 	for _, arch := range archs {
 		suffix := archSuffix(arch)
-		if strings.HasSuffix(name, suffix) {
+		if before, ok := strings.CutSuffix(name, suffix); ok {
 			return &ChannelName{
-				Base: strings.TrimSuffix(name, suffix),
+				Base: before,
 				Arch: arch,
 			}
 		}

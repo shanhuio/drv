@@ -6,6 +6,7 @@ import (
 	"io"
 	"log"
 	"net"
+	"slices"
 	"strings"
 	"sync"
 
@@ -75,20 +76,14 @@ func isCommonProxyError(err error) bool {
 	if IsClosedConnError(err) {
 		return true
 	}
-	for _, this := range []error{
+	return slices.Contains([]error{
 		context.Canceled,
 		io.ErrUnexpectedEOF,
 		io.ErrClosedPipe,
 		errNameRejected,
 		errAlreadyShutdown,
 		errAlreadyClosed,
-	} {
-		if this == err {
-			return true
-		}
-	}
-
-	return false
+	}, err)
 }
 
 func (p *proxy) serve(ctx context.Context, lis net.Listener) error {
