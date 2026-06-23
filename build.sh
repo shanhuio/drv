@@ -1,7 +1,9 @@
 #!/bin/bash
 
-set -ex
+set -euo pipefail
 
-caco3 build dockers/dockers
+set -x
+
+lets build dockers/dockers
 go install ./cmd/homerelease
 homerelease build
