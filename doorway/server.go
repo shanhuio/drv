@@ -4,7 +4,6 @@ import (
 	"context"
 	"crypto/tls"
 	"log"
-	"net"
 	"net/http"
 	"net/http/httputil"
 	"strings"
@@ -22,8 +21,6 @@ type ServerConfig struct {
 	AutoCertCache autocert.Cache
 	Home          aries.Service
 	ManualCerts   map[string]*tls.Certificate
-
-	IPWhitelist []string
 }
 
 type server struct {
@@ -32,8 +29,6 @@ type server struct {
 	proxy         *httputil.ReverseProxy
 	autoCertCache autocert.Cache
 	manualCerts   map[string]*tls.Certificate
-
-	ipWhitelist []*net.IPNet
 }
 
 func makeDefaultHome() aries.Service {
@@ -44,21 +39,9 @@ func makeDefaultHome() aries.Service {
 }
 
 func newServer(config *ServerConfig) (*server, error) {
-	var ipWhitelist []*net.IPNet
-	for _, w := range config.IPWhitelist {
-		_, n, err := net.ParseCIDR(w)
-		if err != nil {
-			return nil, errcode.Annotatef(
-				err, "invalid whitelist entry: %q", w,
-			)
-		}
-		ipWhitelist = append(ipWhitelist, n)
-	}
-
 	s := &server{
 		hostMap:       newMemHostMap(config.HostMap),
 		autoCertCache: config.AutoCertCache,
-		ipWhitelist:   ipWhitelist,
 		manualCerts:   config.ManualCerts,
 	}
 
@@ -75,32 +58,12 @@ func newServer(config *ServerConfig) (*server, error) {
 	return s, nil
 }
 
-func (s *server) checkIP(c *aries.C) error {
-	if len(s.ipWhitelist) == 0 {
-		return nil
-	}
-	ip := aries.RemoteIP(c)
-	if ip == nil {
-		return errcode.InvalidArgf("cannot determine IP address")
-	}
-	for _, n := range s.ipWhitelist {
-		if n.Contains(ip) {
-			return nil
-		}
-	}
-	return errcode.Unauthorizedf("not authorized")
-}
-
 func (s *server) Serve(c *aries.C) error {
 	host := strings.TrimSuffix(c.Req.Host, ".")
 
 	entry := s.hostMap.mapHost(host)
 	if entry == nil {
 		return aries.NotFound
-	}
-
-	if err := s.checkIP(c); err != nil {
-		return err
 	}
 
 	switch entry.typ {
