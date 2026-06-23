@@ -180,6 +180,12 @@ func updateOS(d *drive) error {
 	if err := waitOSInitDone(b); err != nil {
 		return errcode.Annotate(err, "wait OS init done")
 	}
+	fixed, err := fixRootCACertificates(b)
+	if err != nil {
+		log.Println("fix root CA certificates: ", err)
+	} else if fixed {
+		return reboot(b)
+	}
 	if err := setOSUpdateSource(b); err != nil {
 		return errcode.Annotate(err, "set OS upgrade source")
 	}

@@ -43,10 +43,25 @@ func fixRootCACertificates(b *burmilla.Burmilla) (bool, error) {
 		return false, nil // not the known-broken bundle; leave it alone
 	}
 
+	const tmpName = "ca-certificates-202606.crt"
+	tmpFile := path.Join("/tmp", tmpName)
+
+	// Copy the new bundle into /tmp first, then move it into place, so the
+	// replacement at the destination is atomic.
 	s := tarutil.NewStream()
-	s.AddBytes(path.Base(rootCACertFile), tarutil.ModeMeta(0644), caCertificates202606)
-	if err := b.CopyInTarStream(s, path.Dir(rootCACertFile)); err != nil {
-		return false, errcode.Annotate(err, "overwrite root CA certificates")
+	s.AddBytes(tmpName, tarutil.ModeMeta(0644), caCertificates202606)
+	if err := b.CopyInTarStream(s, "/tmp"); err != nil {
+		return false, errcode.Annotate(err, "copy in new root CA certificates")
+	}
+
+	ret, err := b.ExecRet([]string{"sudo", "mv", tmpFile, rootCACertFile})
+	if err != nil {
+		return false, errcode.Annotate(err, "move root CA certificates in place")
+	}
+	if ret != 0 {
+		return false, errcode.Internalf(
+			"move root CA certificates in place: exit %d", ret,
+		)
 	}
 
 	log.Printf("replaced broken root CA certificates %q", rootCACertFile)
