@@ -1,6 +1,7 @@
 package doorway
 
 import (
+	"context"
 	"log"
 	"net"
 	"net/http"
@@ -38,7 +39,7 @@ type fabricsConfig struct {
 	identity Identity
 }
 
-func makeFabricsDialer(ctx C, config *fabricsConfig) (
+func makeFabricsDialer(ctx context.Context, config *fabricsConfig) (
 	*fabdial.Dialer, error,
 ) {
 	if config.dialer != nil {
@@ -72,7 +73,7 @@ func makeFabricsDialer(ctx C, config *fabricsConfig) (
 	return dialer, nil
 }
 
-func listenFabrics(ctx C, config *fabricsConfig) (*tagListener, error) {
+func listenFabrics(ctx context.Context, config *fabricsConfig) (*tagListener, error) {
 	d, err := makeFabricsDialer(ctx, config)
 	if err != nil {
 		return nil, err

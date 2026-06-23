@@ -77,7 +77,7 @@ func makeInternalConfig(config *Config) *internalConfig {
 }
 
 // Serve serves doorway with the given config.
-func Serve(ctx C, config *Config) error {
+func Serve(ctx context.Context, config *Config) error {
 	if config.HTTPServer != nil {
 		http := newHTTPServer(config.HTTPServer)
 		go runHTTPServer(http)
@@ -87,7 +87,7 @@ func Serve(ctx C, config *Config) error {
 	return serve(ctx, internal)
 }
 
-func serve(ctx C, config *internalConfig) error {
+func serve(ctx context.Context, config *internalConfig) error {
 	server, err := newServer(config.server)
 	if err != nil {
 		return errcode.Annotate(err, "make server")

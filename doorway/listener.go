@@ -1,6 +1,7 @@
 package doorway
 
 import (
+	"context"
 	"net"
 
 	"shanhu.io/std/errcode"
@@ -36,7 +37,7 @@ func listenLocal(c *localListenConfig) (*tagListener, error) {
 	return newTagListener(tcp, tagTCP), nil
 }
 
-func listen(ctx C, c *listenConfig) (tagConnListener, error) {
+func listen(ctx context.Context, c *listenConfig) (tagConnListener, error) {
 	if c.local == nil && c.fabrics == nil {
 		return nil, errcode.InvalidArgf(
 			"must listen either at local or via fabrics",
