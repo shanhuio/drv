@@ -1,13 +1,37 @@
 package homeboot
 
 import (
+	"fmt"
 	"net/url"
+	"strings"
 
-	"shanhu.io/drv/bosinit"
 	"shanhu.io/drv/drvapi"
 	"shanhu.io/g/httputil"
 	"shanhu.io/std/errcode"
 )
+
+func fetchGitHubKeys(user string) ([]string, error) {
+	c := &httputil.Client{
+		Server: &url.URL{
+			Scheme: "https",
+			Host:   "github.com",
+		},
+	}
+
+	keys, err := c.GetString(fmt.Sprintf("/%s.keys", user))
+	if err != nil {
+		return nil, err
+	}
+
+	var lines []string
+	for line := range strings.SplitSeq(keys, "\n") {
+		line = strings.TrimSpace(line)
+		if line != "" {
+			lines = append(lines, line)
+		}
+	}
+	return lines, nil
+}
 
 func fetchUserKeys(user string) ([]string, error) {
 	c := &httputil.Client{
@@ -27,7 +51,7 @@ func fetchUserKeys(user string) ([]string, error) {
 func FetchSSHKeys(c *InitConfig) ([]string, error) {
 	var lines []string
 	if c.GitHubKeys != "" {
-		keys, err := bosinit.FetchGitHubKeys(c.GitHubKeys)
+		keys, err := fetchGitHubKeys(c.GitHubKeys)
 		if err != nil {
 			return nil, errcode.Annotate(err, "fetch github keys")
 		}
