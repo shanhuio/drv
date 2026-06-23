@@ -114,5 +114,5 @@ modernc.org/token v1.1.0 h1:Xl7Ap9dKaEs5kLoOQeQmPWevfnk/DM5qcLcYlA8ys6Y=
 modernc.org/token v1.1.0/go.mod h1:UGzOrNV1mAFSEB63lOFHIpNRUVMvYTc6yu1SMY/XTDM=
 shanhu.io/g v0.0.0-20260623071033-046bb04de4cd h1:ekeudVJmvaMH3R8WJoqwaWTdUtZ5LIRjAf5aZz/w7rE=
 shanhu.io/g v0.0.0-20260623071033-046bb04de4cd/go.mod h1:o8thK6m7LKfVoOqYJ/5qBtbYzEmW9p794BE/JI4fJso=
-shanhu.io/std v0.0.0-20260623070910-a946ba6fee46 h1:mCvmCfIr3v5KLhy6xqsUPDjGG8XNGeHZT11cu15gbmo=
-shanhu.io/std v0.0.0-20260623070910-a946ba6fee46/go.mod h1:ahN1Va56JGyjcHaRT1UXzfB10wcI4QTbTuUrYuHn5Fw=
+shanhu.io/std v0.0.0-20260623195914-eaa098509dab h1:cS1L1geJ2hnPNI+7qNoG6EagrDtXYG7YYcHqCkjVNY4=
+shanhu.io/std v0.0.0-20260623195914-eaa098509dab/go.mod h1:ahN1Va56JGyjcHaRT1UXzfB10wcI4QTbTuUrYuHn5Fw=
