@@ -58,12 +58,14 @@ func TestFixRootCACertificatesReplaces(t *testing.T) {
 		t.Fatalf("read broken bundle: %v", err)
 	}
 
-	var gotCmd []string
+	var cpCmd []string
 	b := newFileConsole(
 		t,
 		map[string][]byte{rootCACertFile: broken},
 		func(cmd []string) dockertest.ExecResponse {
-			gotCmd = cmd
+			if len(cmd) > 0 && cmd[0] == "sudo" {
+				cpCmd = cmd
+			}
 			return dockertest.ExecResponse{}
 		},
 	)
@@ -75,7 +77,7 @@ func TestFixRootCACertificatesReplaces(t *testing.T) {
 		t.Errorf("fixRootCACertificates = false, want true on broken bundle")
 	}
 
-	// The new bundle is staged in /tmp before being moved into place.
+	// The new bundle is staged in /tmp before being copied into place.
 	got := readConsoleFile(t, b, "/tmp/ca-certificates-202606.crt")
 	if !bytes.Equal(got, caCertificates202606) {
 		t.Errorf(
@@ -84,13 +86,13 @@ func TestFixRootCACertificatesReplaces(t *testing.T) {
 		)
 	}
 
-	// The move into place is done with sudo.
+	// The destination is a mounted file, so it is overwritten with sudo cp.
 	wantCmd := []string{
-		"sudo", "mv",
+		"sudo", "cp",
 		"/tmp/ca-certificates-202606.crt", rootCACertFile,
 	}
-	if !reflect.DeepEqual(gotCmd, wantCmd) {
-		t.Errorf("move cmd = %q, want %q", gotCmd, wantCmd)
+	if !reflect.DeepEqual(cpCmd, wantCmd) {
+		t.Errorf("overwrite cmd = %q, want %q", cpCmd, wantCmd)
 	}
 }
 
@@ -122,7 +124,7 @@ func TestFixRootCACertificatesReadError(t *testing.T) {
 	}
 }
 
-func TestFixRootCACertificatesMoveError(t *testing.T) {
+func TestFixRootCACertificatesOverwriteError(t *testing.T) {
 	broken, err := os.ReadFile(
 		filepath.Join("testdata", "ca-certificates-2025.crt.rancher"),
 	)
@@ -130,15 +132,18 @@ func TestFixRootCACertificatesMoveError(t *testing.T) {
 		t.Fatalf("read broken bundle: %v", err)
 	}
 
-	// The sudo mv fails.
+	// The sudo cp fails.
 	b := newFileConsole(
 		t,
 		map[string][]byte{rootCACertFile: broken},
 		func(cmd []string) dockertest.ExecResponse {
-			return dockertest.ExecResponse{ExitCode: 1}
+			if len(cmd) > 0 && cmd[0] == "sudo" {
+				return dockertest.ExecResponse{ExitCode: 1}
+			}
+			return dockertest.ExecResponse{}
 		},
 	)
 	if _, err := fixRootCACertificates(b); err == nil {
-		t.Fatalf("fixRootCACertificates: got nil error, want move error")
+		t.Fatalf("fixRootCACertificates: got nil error, want overwrite error")
 	}
 }

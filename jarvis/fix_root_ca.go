@@ -46,21 +46,28 @@ func fixRootCACertificates(b *burmilla.Burmilla) (bool, error) {
 	const tmpName = "ca-certificates-202606.crt"
 	tmpFile := path.Join("/tmp", tmpName)
 
-	// Copy the new bundle into /tmp first, then move it into place, so the
-	// replacement at the destination is atomic.
+	// Copy the new bundle into /tmp first, then overwrite the destination
+	// in place with cp. The destination is a mounted file, so it cannot be
+	// replaced with a move; it must be overwritten.
 	s := tarutil.NewStream()
 	s.AddBytes(tmpName, tarutil.ModeMeta(0644), caCertificates202606)
 	if err := b.CopyInTarStream(s, "/tmp"); err != nil {
 		return false, errcode.Annotate(err, "copy in new root CA certificates")
 	}
+	// Best-effort clean up of the staged file.
+	defer func() {
+		if _, err := b.ExecRet([]string{"rm", "-f", tmpFile}); err != nil {
+			log.Printf("remove staged root CA certificates %q: %s", tmpFile, err)
+		}
+	}()
 
-	ret, err := b.ExecRet([]string{"sudo", "mv", tmpFile, rootCACertFile})
+	ret, err := b.ExecRet([]string{"sudo", "cp", tmpFile, rootCACertFile})
 	if err != nil {
-		return false, errcode.Annotate(err, "move root CA certificates in place")
+		return false, errcode.Annotate(err, "overwrite root CA certificates")
 	}
 	if ret != 0 {
 		return false, errcode.Internalf(
-			"move root CA certificates in place: exit %d", ret,
+			"overwrite root CA certificates: exit %d", ret,
 		)
 	}
 
