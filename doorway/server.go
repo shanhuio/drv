@@ -11,7 +11,7 @@ import (
 
 	"golang.org/x/crypto/acme/autocert"
 	"shanhu.io/g/aries"
-	"shanhu.io/g/certutil"
+	"shanhu.io/std/certdelay"
 	"shanhu.io/std/errcode"
 )
 
@@ -167,9 +167,12 @@ func (s *server) autoTLSConfig() *tls.Config {
 		Cache:      s.autoCertCache,
 	}
 	tlsConfig := autoCert.TLSConfig()
-	tlsConfig.GetCertificate = certutil.WrapAutoCert(
-		tlsConfig.GetCertificate, s.manualCerts,
-	)
+	delayer := &certdelay.Delayer{
+		CertForDomain: func(domain string) *tls.Certificate {
+			return s.manualCerts[domain]
+		},
+	}
+	tlsConfig.GetCertificate = delayer.Wrap(tlsConfig.GetCertificate)
 
 	return tlsConfig
 }
