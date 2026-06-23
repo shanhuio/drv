@@ -3,9 +3,9 @@ package jarvis
 import (
 	"strings"
 
+	"shanhu.io/drv/bosinit"
 	"shanhu.io/drv/burmilla"
 	"shanhu.io/g/aries"
-	"shanhu.io/g/bosinit"
 	"shanhu.io/std/errcode"
 	"shanhu.io/std/tarutil"
 )

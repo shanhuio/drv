@@ -3,8 +3,8 @@ package homeboot
 import (
 	"net/url"
 
+	"shanhu.io/drv/bosinit"
 	"shanhu.io/drv/drvapi"
-	"shanhu.io/g/bosinit"
 	"shanhu.io/g/httputil"
 	"shanhu.io/std/errcode"
 )

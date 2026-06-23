@@ -7,6 +7,7 @@ require (
 	github.com/lib/pq v1.12.3
 	github.com/pquerna/otp v1.5.0
 	golang.org/x/crypto v0.53.0
+	gopkg.in/yaml.v2 v2.4.0
 	modernc.org/sqlite v1.53.0
 	shanhu.io/g v0.0.0-20260620194002-7d14c89a0904
 	shanhu.io/std v0.0.0-20260612232620-c5a277ad5225
@@ -31,7 +32,6 @@ require (
 	golang.org/x/term v0.44.0 // indirect
 	golang.org/x/text v0.38.0 // indirect
 	golang.org/x/time v0.15.0 // indirect
-	gopkg.in/yaml.v2 v2.4.0 // indirect
 	modernc.org/libc v1.73.4 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.11.0 // indirect

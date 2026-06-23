@@ -5,7 +5,7 @@ import (
 	"os"
 	"text/template"
 
-	"shanhu.io/g/bosinit"
+	"shanhu.io/drv/bosinit"
 	"shanhu.io/std/errcode"
 	"shanhu.io/std/jsonx"
 )
