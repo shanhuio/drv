@@ -1,7 +1,6 @@
 package doorway
 
 import (
-	"crypto/tls"
 	"log"
 	"os"
 	"path/filepath"
@@ -21,38 +20,6 @@ func readHostMap(p string) (map[string]string, error) {
 		return nil, err
 	}
 	return m, nil
-}
-
-type manualCertEntry struct {
-	Key   string // key file
-	Certs string // certificate bundle
-}
-
-func readManualCerts(h *osutil.Home) (map[string]*tls.Certificate, error) {
-	entries := make(map[string]*manualCertEntry)
-	if err := jsonx.ReadFile(h.Etc("certs.jsonx"), &entries); err != nil {
-		if os.IsNotExist(err) {
-			return nil, nil
-		}
-		return nil, errcode.Annotate(err, "read certs.jsonx")
-	}
-
-	var domains []string
-	for d := range entries {
-		domains = append(domains, d)
-	}
-	sort.Strings(domains)
-
-	certs := make(map[string]*tls.Certificate)
-	for _, d := range domains {
-		entry := entries[d]
-		cert, err := tls.LoadX509KeyPair(entry.Certs, entry.Key)
-		if err != nil {
-			return nil, errcode.Annotatef(err, "read cert for %q", d)
-		}
-		certs[d] = &cert
-	}
-	return certs, nil
 }
 
 func removeCertsBefore(dir string, t time.Time) error {
@@ -113,15 +80,9 @@ func serverConfigFromHome(h *osutil.Home) (*ServerConfig, error) {
 		log.Print("error on removing old certs: ", err)
 	}
 
-	manualCerts, err := readManualCerts(h)
-	if err != nil {
-		return nil, errcode.Annotate(err, "load manual certs")
-	}
-
 	return &ServerConfig{
 		HostMap:       hostMap,
 		AutoCertCache: autocert.DirCache(certCacheDir),
-		ManualCerts:   manualCerts,
 	}, nil
 }
 

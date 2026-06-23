@@ -20,7 +20,6 @@ type ServerConfig struct {
 	HostMap       map[string]string
 	AutoCertCache autocert.Cache
 	Home          aries.Service
-	ManualCerts   map[string]*tls.Certificate
 }
 
 type server struct {
@@ -28,7 +27,6 @@ type server struct {
 	hostMap       hostMap
 	proxy         *httputil.ReverseProxy
 	autoCertCache autocert.Cache
-	manualCerts   map[string]*tls.Certificate
 }
 
 func makeDefaultHome() aries.Service {
@@ -42,7 +40,6 @@ func newServer(config *ServerConfig) (*server, error) {
 	s := &server{
 		hostMap:       newMemHostMap(config.HostMap),
 		autoCertCache: config.AutoCertCache,
-		manualCerts:   config.ManualCerts,
 	}
 
 	if config.Home == nil {
@@ -130,11 +127,7 @@ func (s *server) autoTLSConfig() *tls.Config {
 		Cache:      s.autoCertCache,
 	}
 	tlsConfig := autoCert.TLSConfig()
-	delayer := &certdelay.Delayer{
-		CertForDomain: func(domain string) *tls.Certificate {
-			return s.manualCerts[domain]
-		},
-	}
+	delayer := new(certdelay.Delayer)
 	tlsConfig.GetCertificate = delayer.Wrap(tlsConfig.GetCertificate)
 
 	return tlsConfig
