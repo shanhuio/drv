@@ -52,8 +52,12 @@ func TestFixRootCACertificatesReplaces(t *testing.T) {
 	}
 
 	b := newFileConsole(t, map[string][]byte{rootCACertFile: broken})
-	if err := fixRootCACertificates(b); err != nil {
+	fixed, err := fixRootCACertificates(b)
+	if err != nil {
 		t.Fatalf("fixRootCACertificates: %v", err)
+	}
+	if !fixed {
+		t.Errorf("fixRootCACertificates = false, want true on broken bundle")
 	}
 
 	got := readConsoleFile(t, b, rootCACertFile)
@@ -71,8 +75,12 @@ func TestFixRootCACertificatesLeavesOthers(t *testing.T) {
 		rootCACertFile: []byte(content),
 	})
 
-	if err := fixRootCACertificates(b); err != nil {
+	fixed, err := fixRootCACertificates(b)
+	if err != nil {
 		t.Fatalf("fixRootCACertificates: %v", err)
+	}
+	if fixed {
+		t.Errorf("fixRootCACertificates = true, want false on other bundle")
 	}
 
 	got := readConsoleFile(t, b, rootCACertFile)
@@ -84,7 +92,7 @@ func TestFixRootCACertificatesLeavesOthers(t *testing.T) {
 func TestFixRootCACertificatesReadError(t *testing.T) {
 	// The console has no such file.
 	b := newFileConsole(t, nil)
-	if err := fixRootCACertificates(b); err == nil {
+	if _, err := fixRootCACertificates(b); err == nil {
 		t.Fatalf("fixRootCACertificates: got nil error, want read error")
 	}
 }

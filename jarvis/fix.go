@@ -31,26 +31,27 @@ const (
 )
 
 // fixRootCACertificates replaces the OS console's root CA certificate bundle
-// when it matches the known-broken version.
-func fixRootCACertificates(b *burmilla.Burmilla) error {
+// when it matches the known-broken version. It returns true when the bundle
+// was overwritten.
+func fixRootCACertificates(b *burmilla.Burmilla) (bool, error) {
 	cur, err := docker.ReadContFile(b.Console(), rootCACertFile)
 	if err != nil {
-		return errcode.Annotate(err, "read root CA certificates")
+		return false, errcode.Annotate(err, "read root CA certificates")
 	}
 
 	sum := sha256.Sum256(cur)
 	if hex.EncodeToString(sum[:]) != brokenRootCACertSHA256 {
-		return nil // not the known-broken bundle; leave it alone
+		return false, nil // not the known-broken bundle; leave it alone
 	}
 
 	s := tarutil.NewStream()
 	s.AddBytes(path.Base(rootCACertFile), tarutil.ModeMeta(0644), caCertificates202606)
 	if err := b.CopyInTarStream(s, path.Dir(rootCACertFile)); err != nil {
-		return errcode.Annotate(err, "overwrite root CA certificates")
+		return false, errcode.Annotate(err, "overwrite root CA certificates")
 	}
 
 	log.Printf("replaced broken root CA certificates %q", rootCACertFile)
-	return nil
+	return true, nil
 }
 
 func fixOSUpgradeURL(d *drive) error {
