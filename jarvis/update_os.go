@@ -99,6 +99,10 @@ func upgradeBurmillaOS(d *drive, v string) error {
 		log.Println("boot partition grub config updated")
 	}
 
+	return reboot(b)
+}
+
+func reboot(b *burmilla.Burmilla) error {
 	log.Println("rebooting machine")
 	if _, err := b.ExecOutput([]string{"reboot", "now"}); err != nil {
 		return errcode.Annotatef(err, "reboot machine")
