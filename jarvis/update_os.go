@@ -172,6 +172,8 @@ func switchOSConsole(b *burmilla.Burmilla) error {
 	return errcode.Internalf("docker not rebooted in %d seconds", waitSecs)
 }
 
+const burmillaOSVersion = "burmilla/os:v2.0.4"
+
 func updateOS(d *drive) error {
 	b, err := d.burmilla()
 	if err != nil {
@@ -189,8 +191,7 @@ func updateOS(d *drive) error {
 	if err := setOSUpdateSource(b); err != nil {
 		return errcode.Annotate(err, "set OS upgrade source")
 	}
-	const target = "burmilla/os:v1.9.6"
-	if err := upgradeBurmillaOS(d, target); err != nil {
+	if err := upgradeBurmillaOS(d, burmillaOSVersion); err != nil {
 		return errcode.Annotate(err, "upgrade OS")
 	}
 	if err := switchOSConsole(b); err != nil {
