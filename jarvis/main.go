@@ -3,6 +3,7 @@ package jarvis
 import (
 	"flag"
 	"log"
+	"time"
 
 	drvcfg "shanhu.io/drv/drvconfig"
 	"shanhu.io/drv/homeboot"
@@ -92,9 +93,11 @@ func run(homeDir, addr string) error {
 	}
 	d := s.Drive()
 	if err := maybeUpdateOS(d); err != nil {
-		// Just exit here. If this is a temp error, it will retry the next
-		// time the container starts.
-		return errcode.Annotate(err, "update os")
+		// This step might fail if the OS is in a weird process
+		// We do not return an error here; otherwise fabrics will be trapped
+		// in a crash-loop that cannot pick up new updates.
+		log.Printf("ERROR: update os failed: %s", err)
+		time.Sleep(10 * time.Second)
 	}
 
 	go bg(s)
