@@ -11,7 +11,9 @@ const (
 
 	keyBuild         = "build"
 	keyBuildUpdating = "build-updating"
-	keyManualBuild   = "manual-build"
+	keyUpdateOSError = "update-os-error"
+
+	keyManualBuild = "manual-build"
 
 	keyIdentity = "identity"
 

@@ -97,7 +97,16 @@ func run(homeDir, addr string) error {
 		// We do not return an error here; otherwise fabrics will be trapped
 		// in a crash-loop that cannot pick up new updates.
 		log.Printf("ERROR: update os failed: %s", err)
-		time.Sleep(10 * time.Second)
+		if err := d.settings.Set(keyUpdateOSError, err.Error()); err != nil {
+			log.Printf("ERROR: fail to save os update error: %s", err)
+		}
+
+		// Give manual operation some time to process this info.
+		time.Sleep(3 * time.Second)
+	} else {
+		if err := d.settings.Set(keyUpdateOSError, ""); err != nil {
+			log.Printf("ERROR: fail to clear os update error: %s", err)
+		}
 	}
 
 	go bg(s)
