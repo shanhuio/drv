@@ -45,7 +45,7 @@ file_set {
     Ignore: [
         "jarvis/web/",
         "dockers/",
-        "*.caco3",
+        "BUILD.lets",
         "LICENSE",
         "sums.jsonx",
     ],
