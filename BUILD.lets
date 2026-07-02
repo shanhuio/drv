@@ -5,7 +5,7 @@ repo {
     },
 }
 
-docker_run {
+container_run {
     Name: "bins",
     Image: "/shanhu.io/bld/dockers/forge",
     MountDir: "/work",

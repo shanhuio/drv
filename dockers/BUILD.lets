@@ -1,11 +1,11 @@
-docker_build {
+image_build {
     Name: "homeboot",
     From: ["/shanhu.io/bld/dockers/app"],
     Input: ["/shanhu.io/drv/cmd/homeboot"],
     OutputTar: true,
 }
 
-docker_build {
+image_build {
     Name: "core",
     From: ["/shanhu.io/bld/dockers/base"],
     Input: [
@@ -17,118 +17,118 @@ docker_build {
     OutputTar: true,
 }
 
-docker_build {
+image_build {
     Name: "ncfront",
     From: ["/shanhu.io/bld/dockers/app"],
     Input: ["/shanhu.io/drv/daemon/ncfrontd"],
     OutputTar: true,
 }
 
-docker_build {
+image_build {
     Name: "doorway",
     From: ["/shanhu.io/bld/dockers/app"],
     Input: ["/shanhu.io/drv/daemon/doorwayd"],
     OutputTar: true,
 }
 
-docker_build {
+image_build {
     Name: "toolbox",
     From: ["/shanhu.io/bld/dockers/base"],
     Input: ["/shanhu.io/drv/daemon/toolboxd"],
     OutputTar: true,
 }
 
-docker_pull {
+image_pull {
     Name: "nextcloud20",
     Pull: "nextcloud:20.0.14",
     OutputTar: true,
 }
 
-docker_pull {
+image_pull {
     Name: "nextcloud21",
     Pull: "nextcloud:21.0.9",
     OutputTar: true,
 }
 
-docker_pull {
+image_pull {
     Name: "nextcloud22",
     Pull: "nextcloud:22.2.10",
     OutputTar: true,
 }
 
-docker_pull {
+image_pull {
     Name: "nextcloud23",
     Pull: "nextcloud:23.0.12",
     OutputTar: true,
 }
 
-docker_pull {
+image_pull {
     Name: "nextcloud24",
     Pull: "nextcloud:24.0.12",
     OutputTar: true,
 }
 
-docker_pull {
+image_pull {
     Name: "nextcloud25",
     Pull: "nextcloud:25.0.13",
     OutputTar: true,
 }
 
-docker_pull {
+image_pull {
     Name: "nextcloud26",
     Pull: "nextcloud:26.0.13",
     OutputTar: true,
 }
 
-docker_pull {
+image_pull {
     Name: "nextcloud27",
     Pull: "nextcloud:27.1.9",
     OutputTar: true,
 }
 
-docker_pull {
+image_pull {
     Name: "nextcloud28",
     Pull: "nextcloud:28.0.14",
     OutputTar: true,
 }
 
-docker_pull {
+image_pull {
     Name: "nextcloud29",
     Pull: "nextcloud:29.0.16",
     OutputTar: true,
 }
 
-docker_pull {
+image_pull {
     Name: "nextcloud30",
     Pull: "nextcloud:30.0.16",
     OutputTar: true,
 }
 
-docker_pull {
+image_pull {
     Name: "nextcloud31",
     Pull: "nextcloud:31.0.14",
     OutputTar: true,
 }
 
-docker_pull {
+image_pull {
     Name: "nextcloud32",
     Pull: "nextcloud:32.0.12",
     OutputTar: true,
 }
 
-docker_pull {
+image_pull {
     Name: "nextcloud33",
     Pull: "nextcloud:33.0.6",
     OutputTar: true,
 }
 
-docker_pull {
+image_pull {
     Name: "redis",
     Pull: "redis:6.2.12-bullseye", // Maybe upgrade to redis 7?
     OutputTar: true,
 }
 
-docker_pull {
+image_pull {
     Name: "postgres12",
     Pull: "postgres:12.22-bullseye",
     OutputTar: true,
@@ -136,7 +136,7 @@ docker_pull {
 
 // NEXTCLOUD_UPGRADE: add new nextcloud container here.
 bundle {
-    Name: "dockers",
+    Name: "images",
     Deps: [
         "homeboot",
         "core",

@@ -4,6 +4,6 @@ set -euo pipefail
 
 set -x
 
-lets build dockers/dockers
+lets build dockers/images
 go install ./cmd/homerelease
 homerelease build

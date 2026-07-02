@@ -1,4 +1,4 @@
-docker_run {
+container_run {
     Name: "build_zip",
     Image: "/shanhu.io/bld/dockers/nodejs",
     Command: ["/bin/bash", "lets-build.sh"],
