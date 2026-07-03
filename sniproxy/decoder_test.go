@@ -4,13 +4,14 @@ import (
 	"testing"
 
 	"bytes"
-	"math/rand"
+	"crypto/rand"
+	"io"
 	"reflect"
 )
 
 func TestDecoder(t *testing.T) {
 	bigTrunk := make([]byte, 1024*32)
-	if _, err := rand.Read(bigTrunk); err != nil {
+	if _, err := io.ReadFull(rand.Reader, bigTrunk); err != nil {
 		t.Fatal("generate big trunk data", err)
 	}
 
