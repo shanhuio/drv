@@ -38,8 +38,8 @@ func TestMapAddress(t *testing.T) {
 		addrWant: "167.172.10.171:443",
 	}, {
 		net:      "tcp4",
-		addr:     "fabrics-sgp.homedrive.io:22",
-		addrWant: "149.28.152.149:22",
+		addr:     "fabrics-ge.homedrive.io:22",
+		addrWant: "157.245.24.167:22",
 	}, {
 		// Hosts not in the map are left unchanged.
 		net:      "tcp",

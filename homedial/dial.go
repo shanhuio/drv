@@ -18,7 +18,6 @@ var homedrvIPv4 = map[string]string{
 	"fabrics.homedrive.io":     "178.128.130.77",
 	"fabrics-ge.homedrive.io":  "157.245.24.167",
 	"fabrics-ge1.homedrive.io": "206.81.25.26",
-	"fabrics-sgp.homedrive.io": "149.28.152.149",
 }
 
 func mapAddress(network, addr string) string {
