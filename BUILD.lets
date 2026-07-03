@@ -13,6 +13,7 @@ container_run {
     Envs: [
         "GOPRIVATE=shanhu.io",
         "GOPATH=/go",
+        "GOCACHE=/gocache",
     ],
     Command: [
         "go", "install",
@@ -37,6 +38,10 @@ container_run {
     Deps: [
         "all_files",
     ],
+    CacheVolumes: {
+        "/gocache": "go-cache",
+        "/go/pkg": "go-pkg",
+    },
 }
 
 file_set {
