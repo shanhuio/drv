@@ -9,7 +9,7 @@ require (
 	golang.org/x/crypto v0.54.0
 	gopkg.in/yaml.v2 v2.4.0
 	modernc.org/sqlite v1.54.0
-	shanhu.io/g v0.0.0-20260707030607-2b85f4bbf65e
+	shanhu.io/g v0.0.0-20260720064238-627d2bff288f
 	shanhu.io/std v0.0.0-20260710075402-fe606fb0344d
 )
 
