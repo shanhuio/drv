@@ -112,13 +112,19 @@ image_pull {
 
 image_pull {
     Name: "nextcloud32",
-    Pull: "nextcloud:32.0.12",
+    Pull: "nextcloud:32.0.13",
     OutputTar: true,
 }
 
 image_pull {
     Name: "nextcloud33",
-    Pull: "nextcloud:33.0.6",
+    Pull: "nextcloud:33.0.7",
+    OutputTar: true,
+}
+
+image_pull {
+    Name: "nextcloud34",
+    Pull: "nextcloud:34.0.2",
     OutputTar: true,
 }
 
