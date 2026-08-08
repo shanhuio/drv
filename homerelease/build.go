@@ -177,7 +177,7 @@ func (b *builder) buildRelease(name string) error {
 
 	log.Printf("writing out objects")
 	objOut := filePath(b.out, repo, "objs.tar")
-	if err := writeObjects(objOut, imageObjs); err != nil {
+	if err := writeObjects(objOut, imageObjs, b.out); err != nil {
 		return errcode.Annotate(err, "writing out object archive")
 	}
 
