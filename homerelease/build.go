@@ -22,6 +22,35 @@ type imageSum struct {
 	Origin string `json:",omitempty"`
 }
 
+// readImageStep reads the lets image sum for an image and builds its
+// StepVersion, deriving the version from the origin image tag. sumFile is the
+// path to the image's <name>.imgsum file; img is the checksum of its tarball.
+func readImageStep(
+	sumFile string, img *dockerImage,
+) (*drvapi.StepVersion, error) {
+	sum := new(imageSum)
+	if err := jsonutil.ReadFile(sumFile, sum); err != nil {
+		return nil, errcode.Annotatef(err, "read sum file %q", sumFile)
+	}
+	if sum.Origin == "" {
+		return nil, errcode.InvalidArgf("origin missing in %q", sumFile)
+	}
+
+	_, tag := docker.ParseImageTag(sum.Origin)
+	major, err := semver.Major(tag)
+	if err != nil {
+		return nil, errcode.Annotatef(err, "parse tag %q", sum.Origin)
+	}
+
+	return &drvapi.StepVersion{
+		Major:    major,
+		Version:  tag,
+		Source:   sum.Origin,
+		Image:    img.id,
+		ImageSum: img.sum,
+	}, nil
+}
+
 const (
 	nextcloudMinVersion = 20
 	nextcloudMaxVersion = 33 // NEXTCLOUD_UPGRADE
@@ -94,32 +123,12 @@ func (b *builder) buildRelease(name string) error {
 		for _, img := range entry.images {
 			id := images[img]
 			sumFile := filePath(b.out, repo, img+".imgsum")
-			sum := new(imageSum)
-			if err := jsonutil.ReadFile(sumFile, sum); err != nil {
-				return errcode.Annotatef(
-					err, "read sum file %q", sumFile,
-				)
-			}
-			if sum.Origin == "" {
-				return errcode.InvalidArgf("origin missing for %q", img)
-			}
-
-			_, tag := docker.ParseImageTag(sum.Origin)
-			major, err := semver.Major(tag)
+			step, err := readImageStep(sumFile, id)
 			if err != nil {
-				return errcode.Annotatef(
-					err, "parse tag of %s: %q", img, sum.Origin,
-				)
+				return errcode.Annotatef(err, "image %q", img)
 			}
 
 			if entry.steps != nil {
-				step := &drvapi.StepVersion{
-					Major:    major,
-					Version:  tag,
-					Source:   sum.Origin,
-					Image:    id.id,
-					ImageSum: id.sum,
-				}
 				*entry.steps = append(*entry.steps, step)
 			}
 			final = id.id
