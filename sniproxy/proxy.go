@@ -107,13 +107,16 @@ func (p *proxy) serve(ctx context.Context, lis net.Listener) error {
 			return err
 		}
 		wg.Add(1)
-		go func(ctx context.Context) {
+		go func(ctx context.Context, conn net.Conn) {
 			defer wg.Done()
 			if err := p.hostConn(ctx, conn); err != nil {
 				if !isCommonProxyError(err) {
-					log.Print("proxy connection error: ", err)
+					log.Printf(
+						"proxy connection error from %s: %s",
+						conn.RemoteAddr(), err,
+					)
 				}
 			}
-		}(ctx)
+		}(ctx, conn)
 	}
 }
