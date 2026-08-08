@@ -17,8 +17,8 @@ type builder struct {
 	out string
 }
 
-// dockerSum from caco3 docker build/pull output.
-type dockerSum struct {
+// imageSum from lets docker image build/pull output.
+type imageSum struct {
 	Origin string `json:",omitempty"`
 }
 
@@ -93,8 +93,8 @@ func (b *builder) buildRelease(name string) error {
 		final := ""
 		for _, img := range entry.images {
 			id := images[img]
-			sumFile := filePath(b.out, repo, img+".dockersum")
-			sum := new(dockerSum)
+			sumFile := filePath(b.out, repo, img+".imgsum")
+			sum := new(imageSum)
 			if err := jsonutil.ReadFile(sumFile, sum); err != nil {
 				return errcode.Annotatef(
 					err, "read sum file %q", sumFile,
