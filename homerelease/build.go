@@ -53,7 +53,7 @@ func readImageStep(
 
 const (
 	nextcloudMinVersion = 20
-	nextcloudMaxVersion = 33 // NEXTCLOUD_UPGRADE
+	nextcloudMaxVersion = 34 // NEXTCLOUD_UPGRADE
 )
 
 func (b *builder) buildRelease(name string) error {
