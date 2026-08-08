@@ -3,6 +3,7 @@ package homerelease
 import (
 	"fmt"
 	"log"
+	"path/filepath"
 	"runtime"
 	"time"
 
@@ -88,13 +89,14 @@ func (b *builder) buildRelease(name string) error {
 
 	for _, d := range imageNames {
 		log.Printf("checksuming %s", d)
-		tgz := filePath(b.out, repo, d+".tar.gz")
+		rel := filePath("", repo, d+".tar.gz")
+		tgz := filepath.Join(b.out, rel)
 		img, err := sumDockerTgz(tgz)
 		if err != nil {
 			return errcode.Annotatef(err, "checksum for %q", d)
 		}
 		images[d] = img
-		imageObjs[img.sum] = tgz
+		imageObjs[img.sum] = rel
 	}
 
 	log.Println("building artifacts jsonx")

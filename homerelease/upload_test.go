@@ -100,7 +100,7 @@ func makeObjsTar(
 		}
 		h := sha256.Sum256([]byte(content))
 		sum := "sha256:" + hex.EncodeToString(h[:])
-		objects[sum] = p
+		objects[sum] = name // path relative to dir
 		sums[name] = sum
 	}
 
@@ -162,7 +162,10 @@ func TestUploaderUpload(t *testing.T) {
 		t.Errorf("uploaded %q = %q, want %q", ncSum, got, "content-b")
 	}
 	if len(srv.uploaded) != 1 {
-		t.Errorf("uploaded %d objects, want 1: %v", len(srv.uploaded), srv.uploaded)
+		t.Errorf(
+			"uploaded %d objects, want 1: %v",
+			len(srv.uploaded), srv.uploaded,
+		)
 	}
 
 	// Every uploaded object is keyed by a valid sha256 digest of its content.
@@ -305,7 +308,9 @@ func TestUploaderUploadNoManifest(t *testing.T) {
 
 func TestUploaderUploadPutError(t *testing.T) {
 	dir := t.TempDir()
-	objs, _ := makeObjsTar(t, dir, map[string]string{"core.tar.gz": "content-a"})
+	objs, _ := makeObjsTar(t, dir, map[string]string{
+		"core.tar.gz": "content-a",
+	})
 
 	srv := newFakeObjServer(nil) // nothing exists, so it will try to PUT
 	srv.putFail = true

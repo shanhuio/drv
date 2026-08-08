@@ -10,27 +10,22 @@ import (
 	"shanhu.io/std/tarutil"
 )
 
-// writeObjects writes the objects into a tarball keyed by their checksums. It
-// also writes a manifest.json entry (first, so a reader sees it before the
-// objects) that maps each object's checksum to its source file path relative
-// to baseDir, so uploads can be labeled with a human-readable name.
+// writeObjects writes the objects into a tarball keyed by their checksums.
+// objects maps each object's checksum to its source file path relative to
+// baseDir. It also writes a manifest.json entry (first, so a reader sees it
+// before the objects) carrying those relative paths, so uploads can be labeled
+// with a human-readable name.
 func writeObjects(p string, objects map[string]string, baseDir string) error {
 	var sums []string
 	for sum := range objects {
 		sums = append(sums, sum)
 	}
-	sort.Strings(sums)
+	// Order the objects by their file name for a stable, human-friendly order.
+	sort.Slice(sums, func(i, j int) bool {
+		return objects[sums[i]] < objects[sums[j]]
+	})
 
-	names := make(map[string]string)
-	for sum, file := range objects {
-		name, err := filepath.Rel(baseDir, file)
-		if err != nil {
-			return errcode.Annotatef(err, "rel path for %q", file)
-		}
-		names[sum] = name
-	}
-
-	manifest, err := json.Marshal(&objectManifest{Names: names})
+	manifest, err := json.Marshal(&objectManifest{Names: objects})
 	if err != nil {
 		return errcode.Annotate(err, "marshal manifest")
 	}
@@ -38,7 +33,8 @@ func writeObjects(p string, objects map[string]string, baseDir string) error {
 	stream := tarutil.NewStream()
 	stream.AddBytes(objectManifestName, tarutil.ModeMeta(0644), manifest)
 	for _, sum := range sums {
-		stream.AddFile(sum, tarutil.ModeMeta(0644), objects[sum])
+		file := filepath.Join(baseDir, objects[sum])
+		stream.AddFile(sum, tarutil.ModeMeta(0644), file)
 	}
 
 	f, err := os.Create(p)

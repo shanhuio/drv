@@ -13,24 +13,26 @@ import (
 func TestWriteObjects(t *testing.T) {
 	dir := t.TempDir()
 
-	// Two source files keyed by their (fake) checksum names. srcA sits in a
-	// subdirectory so the manifest name is a relative path, not a basename.
-	subDir := filepath.Join(dir, "dockers")
-	if err := os.MkdirAll(subDir, 0755); err != nil {
+	// Two source files keyed by their (fake) checksum names, given as paths
+	// relative to dir. srcA sits in a subdirectory so its manifest name is a
+	// relative path, not a basename.
+	if err := os.MkdirAll(filepath.Join(dir, "dockers"), 0755); err != nil {
 		t.Fatalf("mkdir subdir: %v", err)
 	}
-	srcA := filepath.Join(subDir, "a.src")
-	srcB := filepath.Join(dir, "b.src")
-	if err := os.WriteFile(srcA, []byte("content-a"), 0644); err != nil {
-		t.Fatalf("write srcA: %v", err)
+	relA := filepath.Join("dockers", "a.src")
+	relB := "b.src"
+	writeFile := func(rel, content string) {
+		p := filepath.Join(dir, rel)
+		if err := os.WriteFile(p, []byte(content), 0644); err != nil {
+			t.Fatalf("write %q: %v", rel, err)
+		}
 	}
-	if err := os.WriteFile(srcB, []byte("content-b"), 0644); err != nil {
-		t.Fatalf("write srcB: %v", err)
-	}
+	writeFile(relA, "content-a")
+	writeFile(relB, "content-b")
 
 	objects := map[string]string{
-		"fake:bbb": srcB,
-		"fake:aaa": srcA,
+		"fake:bbb": relB,
+		"fake:aaa": relA,
 	}
 
 	out := filepath.Join(dir, "objs.tar")
@@ -89,10 +91,11 @@ func TestWriteObjects(t *testing.T) {
 		t.Errorf("manifest names = %+v, want %+v", manifest.Names, wantNames)
 	}
 
-	// Object entries are written sorted by checksum name.
+	// Object entries are written sorted by file name: "b.src" sorts before
+	// "dockers/a.src".
 	want := []entry{
-		{name: "fake:aaa", body: "content-a"},
 		{name: "fake:bbb", body: "content-b"},
+		{name: "fake:aaa", body: "content-a"},
 	}
 	if len(got) != len(want) {
 		t.Fatalf("got %d entries, want %d: %+v", len(got), len(want), got)
